@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import './App.css'
-import MusicPlayer from './components/MusicPlayer'
 import FloatingParticles from './components/FloatingParticles'
 import FinalScene from './components/FinalScene'
 
@@ -88,9 +87,6 @@ function App() {
       {/* Фоновые эффекты */}
       <div className="background-gradient" />
       <FloatingParticles />
-
-      {/* Музыкальный плеер */}
-      <MusicPlayer />
 
       {/* Контейнер со сценами */}
       <div className="scroll-container" ref={containerRef}>
