@@ -1,0 +1,236 @@
+.final-scene {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.invitation {
+  text-align: center;
+  max-width: 600px;
+}
+
+.final-message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 60px;
+  font-weight: 300;
+}
+
+.final-message .subtle {
+  font-size: 1.2rem;
+  opacity: 0.7;
+  font-style: italic;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.take-flowers-btn {
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: rgba(255, 192, 203, 0.2);
+  border: 2px solid rgba(255, 192, 203, 0.5);
+  border-radius: 50px;
+  color: #d4669a;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(255, 192, 203, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Экран выбора доставки */
+.delivery-choice {
+  text-align: center;
+  max-width: 600px;
+}
+
+.delivery-message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 50px;
+  font-weight: 300;
+}
+
+.delivery-buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.delivery-btn {
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: rgba(255, 192, 203, 0.2);
+  border: 2px solid rgba(255, 192, 203, 0.5);
+  border-radius: 50px;
+  color: #d4669a;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(255, 192, 203, 0.2);
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.bouquet-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+.bouquet {
+  position: relative;
+  width: 300px;
+  height: 400px;
+}
+
+.stems {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  transform-origin: bottom;
+}
+
+.stem {
+  position: absolute;
+  bottom: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to top, #2d5016, #4a7c2c);
+  border-radius: 2px;
+  /* Центрируем стебель относительно позиции left */
+  transform: translateX(-50%);
+}
+
+.flowers {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.flower {
+  position: absolute;
+  top: 40%;
+  width: 80px;
+  height: 80px;
+  transform-origin: center;
+  /* Центрирование управляется через framer-motion (x: '-50%') */
+}
+
+.petal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 40px;
+  border-radius: 50% 50% 50% 0;
+  transform-origin: 0 100%;
+  margin-left: -5px;
+  margin-top: -35px;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.flower-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #FFD700;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.bow {
+  position: absolute;
+  bottom: 25%;
+  left: 39%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  filter: drop-shadow(0 4px 8px rgba(255, 192, 203, 0.4));
+}
+
+.thanks-message {
+  text-align: center;
+}
+
+.thanks-message p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.thanks-message .respect {
+  font-size: 1.3rem;
+  opacity: 0.7;
+  font-style: italic;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .final-message {
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+  }
+
+  .take-flowers-btn {
+    padding: 15px 40px;
+    font-size: 1rem;
+  }
+
+  .delivery-message {
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+  }
+
+  .delivery-buttons {
+    gap: 20px;
+  }
+
+  .delivery-btn {
+    padding: 15px 40px;
+    font-size: 1rem;
+    min-width: 130px;
+  }
+
+  .bouquet {
+    width: 200px;
+    height: 300px;
+  }
+
+  .flower {
+    width: 60px;
+    height: 60px;
+  }
+
+  .petal {
+    width: 24px;
+    height: 32px;
+  }
+
+  .bow {
+    font-size: 2rem;
+  }
+
+  .thanks-message p {
+    font-size: 1.5rem;
+  }
+
+  .thanks-message .respect {
+    font-size: 1.1rem;
+  }
+}
