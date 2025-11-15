@@ -75,7 +75,7 @@ function FinalScene() {
             >
               Я рядом, когда ты будешь готова к спокойному и честному разговору
               <br />
-              <span className="subtle">Без давления.</span>
+              <span className="subtle">Всё в твоём темпе.</span>
             </motion.p>
 
             <motion.button
@@ -134,16 +134,12 @@ function FinalScene() {
           </motion.div>
         ) : (
           <motion.div
-            key="bouquet"
-            className="bouquet-container"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
+            key="thanks"
+            className="thanks-container"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            {/* Анимированный букет */}
-            <Bouquet />
-
-            {/* Текст благодарности */}
             <AnimatePresence>
               {showThanks && (
                 <motion.div
@@ -160,81 +156,6 @@ function FinalScene() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
-  )
-}
-
-// Компонент анимированного букета цветов
-function Bouquet() {
-  const flowers = [
-    { color: '#FFB6C1', delay: 0, rotate: -15 },
-    { color: '#FFC0CB', delay: 0.1, rotate: 0 },
-    { color: '#FFB6C1', delay: 0.2, rotate: 15 },
-    { color: '#FF69B4', delay: 0.15, rotate: -25 },
-    { color: '#FFC0CB', delay: 0.25, rotate: 25 },
-  ]
-
-  return (
-    <div className="bouquet">
-      {/* Стебли */}
-      <motion.div
-        className="stems"
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        {flowers.map((_, i) => (
-          <div
-            key={i}
-            className="stem"
-            style={{ left: `${20 + i * 15}%` }}
-          />
-        ))}
-      </motion.div>
-
-      {/* Цветы */}
-      <div className="flowers">
-        {flowers.map((flower, i) => (
-          <motion.div
-            key={i}
-            className="flower"
-            style={{
-              left: `${20 + i * 15}%`,
-            }}
-            initial={{ scale: 0, rotate: 0 }}
-            animate={{
-              scale: 1,
-              rotate: flower.rotate,
-              x: '-50%' // Центрируем относительно left позиции
-            }}
-            transition={{
-              duration: 0.8,
-              delay: flower.delay,
-              ease: [0.34, 1.56, 0.64, 1]
-            }}
-          >
-            {/* Лепестки */}
-            {[...Array(6)].map((_, petalIndex) => (
-              <motion.div
-                key={petalIndex}
-                className="petal"
-                style={{
-                  backgroundColor: flower.color,
-                  rotate: `${petalIndex * 60}deg`,
-                }}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{
-                  duration: 0.4,
-                  delay: flower.delay + petalIndex * 0.05
-                }}
-              />
-            ))}
-            {/* Центр цветка */}
-            <div className="flower-center" />
-          </motion.div>
-        ))}
-      </div>
     </div>
   )
 }
