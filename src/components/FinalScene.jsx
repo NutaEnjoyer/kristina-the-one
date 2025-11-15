@@ -73,7 +73,7 @@ function FinalScene() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
             >
-              Если однажды ты захочешь услышать всё спокойно — я буду рядом.
+              Я рядом, когда ты будешь готова к спокойному и честному разговору
               <br />
               <span className="subtle">Без давления.</span>
             </motion.p>
@@ -235,16 +235,6 @@ function Bouquet() {
           </motion.div>
         ))}
       </div>
-
-      {/* Бантик */}
-      <motion.div
-        className="bow"
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-      >
-        🎀
-      </motion.div>
     </div>
   )
 }
