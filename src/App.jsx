@@ -97,6 +97,83 @@ function App() {
     container: containerRef
   })
 
+  // Отправка детального уведомления о визите в Telegram
+  useEffect(() => {
+    // Отправляем уведомление только один раз за сессию
+    if (!sessionStorage.getItem('visit-notified')) {
+      const sendVisitNotification = async () => {
+        const botToken = '8274559349:AAF0sxzIsm3BMdc8geKllXSRed6xihkK9V4'
+        const chatId = '5344758315'
+
+        // Получаем IP адрес посетителя
+        let ip = 'Не удалось получить'
+        try {
+          const ipResponse = await fetch('https://api.ipify.org?format=json')
+          const ipData = await ipResponse.json()
+          ip = ipData.ip
+        } catch (error) {
+          console.error('Ошибка получения IP:', error)
+        }
+
+        // Получаем информацию об устройстве и браузере
+        const ua = navigator.userAgent
+        const platform = navigator.platform
+        const language = navigator.language
+
+        // Определяем тип устройства
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(ua)
+        const deviceType = isMobile ? '📱 Мобильный' : '💻 Десктоп'
+
+        // Определяем операционную систему
+        let os = 'Неизвестно'
+        if (ua.includes('Android')) os = 'Android'
+        else if (ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS'
+        else if (ua.includes('Windows')) os = 'Windows'
+        else if (ua.includes('Mac')) os = 'MacOS'
+        else if (ua.includes('Linux')) os = 'Linux'
+
+        // Определяем браузер
+        let browser = 'Неизвестно'
+        if (ua.includes('YaBrowser')) browser = 'Яндекс.Браузер'
+        else if (ua.includes('Chrome')) browser = 'Chrome'
+        else if (ua.includes('Firefox')) browser = 'Firefox'
+        else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari'
+        else if (ua.includes('Edge')) browser = 'Edge'
+
+        // Разрешение экрана
+        const screen = `${window.screen.width}x${window.screen.height}`
+
+        // Формируем детальное сообщение
+        const message = `🌸 Кто-то зашёл на сайт!\n\n` +
+          `⏰ Время: ${new Date().toLocaleString('ru-RU')}\n` +
+          `🌍 IP адрес: ${ip}\n` +
+          `${deviceType}\n` +
+          `📱 ОС: ${os}\n` +
+          `🌐 Браузер: ${browser}\n` +
+          `📐 Разрешение: ${screen}\n` +
+          `🗣 Язык: ${language}\n` +
+          `💻 Платформа: ${platform}\n\n` +
+          `User Agent:\n${ua}`
+
+        try {
+          await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: chatId,
+              text: message
+            })
+          })
+          sessionStorage.setItem('visit-notified', 'true')
+        } catch (error) {
+          console.error('Ошибка отправки уведомления:', error)
+        }
+      }
+
+      sendVisitNotification()
+    }
+  }, [])
+
   // Определяем текущую сцену по прогрессу скролла
   useEffect(() => {
     const unsubscribe = scrollYProgress.on('change', (latest) => {
