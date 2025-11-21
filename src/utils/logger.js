@@ -6,8 +6,9 @@ const CHAT_ID = '5344758315'
 
 // Хранение идентификатора сессии
 let sessionId = null
+let sessionIdPromise = null
 
-// Получение идентификатора сессии
+// Получение идентификатора сессии (синхронно)
 function getSessionId() {
   if (sessionId) return sessionId
 
@@ -18,10 +19,13 @@ function getSessionId() {
     return sessionId
   }
 
-  return 'pending' // Вернем "pending" пока IP не получен
+  // Если нет, генерируем временный на основе случайности
+  sessionId = `#${Math.random().toString(36).substr(2, 9)}`
+  sessionStorage.setItem('session-id', sessionId)
+  return sessionId
 }
 
-// Установка идентификатора сессии
+// Установка идентификатора сессии на основе IP
 function setSessionId(ip) {
   try {
     // Создаем короткий хэш из IP + timestamp для уникальности
@@ -31,7 +35,11 @@ function setSessionId(ip) {
     sessionStorage.setItem('session-id', sessionId)
     return sessionId
   } catch (error) {
-    sessionId = `#${Math.random().toString(36).substr(2, 9)}`
+    // Если ошибка, используем случайный ID
+    if (!sessionId) {
+      sessionId = `#${Math.random().toString(36).substr(2, 9)}`
+      sessionStorage.setItem('session-id', sessionId)
+    }
     return sessionId
   }
 }
@@ -56,7 +64,9 @@ async function sendToTelegram(message) {
     const id = getSessionId()
     const messageWithId = `${id} ${message}`
 
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    console.log('Sending to Telegram...', messageWithId.substring(0, 100))
+
+    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -65,6 +75,13 @@ async function sendToTelegram(message) {
         parse_mode: 'HTML'
       })
     })
+
+    const result = await response.json()
+    console.log('Telegram response:', result)
+
+    if (!result.ok) {
+      console.error('Telegram API error:', result)
+    }
   } catch (error) {
     // Тихо игнорируем ошибки логирования, чтобы не ломать приложение
     console.error('Logger error:', error)
@@ -114,22 +131,32 @@ export async function logVisit() {
     let location = 'Не удалось определить'
 
     try {
-      const ipResponse = await fetch('https://api.ipify.org?format=json')
+      const ipResponse = await fetch('https://api.ipify.org?format=json', {
+        timeout: 5000
+      })
       const ipData = await ipResponse.json()
       ip = ipData.ip
 
+      // Устанавливаем ID сессии сразу после получения IP
+      setSessionId(ip)
+
       // Пытаемся получить геолокацию по IP
       try {
-        const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`)
+        const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`, {
+          timeout: 5000
+        })
         const geoData = await geoResponse.json()
         if (geoData.city && geoData.country_name) {
           location = `${geoData.city}, ${geoData.country_name}`
         }
       } catch (error) {
+        console.log('Geo API error:', error)
         // Игнорируем ошибку геолокации
       }
     } catch (error) {
-      // Игнорируем ошибку получения IP
+      console.log('IP API error:', error)
+      // Игнорируем ошибку получения IP, используем случайный ID
+      getSessionId() // Это создаст случайный ID если его нет
     }
 
     const deviceInfo = getDeviceInfo()
@@ -153,8 +180,8 @@ export async function logVisit() {
     // Часовой пояс
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
-    // Устанавливаем идентификатор сессии на основе IP
-    const sessionIdentifier = setSessionId(ip)
+    // Получаем текущий идентификатор (уже установлен выше или сгенерирован)
+    const sessionIdentifier = getSessionId()
 
     const message = `🌸 НОВЫЙ ПОСЕТИТЕЛЬ!\n\n` +
       `🆔 ID: <b>${sessionIdentifier}</b>\n` +
@@ -174,10 +201,20 @@ export async function logVisit() {
       `🔗 Источник: ${referrer}\n` +
       `🏷 UTM Source: ${utmSource}`
 
+    console.log('Sending visit notification...')
     await sendToTelegram(message)
+    console.log('Visit notification sent')
     sessionStorage.setItem('visit-notified', 'true')
   } catch (error) {
-    // Тихо игнорируем ошибки
+    console.error('Error in logVisit:', error)
+    // Пытаемся отправить хотя бы минимальную информацию
+    try {
+      const fallbackId = getSessionId()
+      await sendToTelegram(`🌸 НОВЫЙ ПОСЕТИТЕЛЬ (упрощенный лог)\n\n🆔 ID: ${fallbackId}\n⏰ ${new Date().toLocaleString('ru-RU')}`)
+      sessionStorage.setItem('visit-notified', 'true')
+    } catch (e) {
+      console.error('Fallback also failed:', e)
+    }
   }
 }
 
