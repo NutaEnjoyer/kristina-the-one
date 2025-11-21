@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import './FinalScene.css'
+import { logButtonClick, logDeliveryChoice } from '../utils/logger'
 
 function FinalScene() {
   const [showDeliveryChoice, setShowDeliveryChoice] = useState(false)
@@ -9,33 +10,48 @@ function FinalScene() {
   const [deliveryMethod, setDeliveryMethod] = useState('')
 
   const handleTakeFlowers = () => {
+    try {
+      logButtonClick('Забрать цветы', {
+        'Время на сайте': getSessionDuration()
+      })
+    } catch (error) {
+      // Тихо игнорируем ошибки
+    }
     setShowDeliveryChoice(true)
+  }
+
+  // Вспомогательная функция для получения длительности сессии
+  const getSessionDuration = () => {
+    try {
+      const startTime = sessionStorage.getItem('session-start')
+      if (!startTime) return 'неизвестно'
+      const duration = Date.now() - parseInt(startTime)
+      const minutes = Math.floor(duration / 60000)
+      const seconds = Math.floor((duration % 60000) / 1000)
+      if (minutes > 0) {
+        return `${minutes} мин ${seconds} сек`
+      }
+      return `${seconds} сек`
+    } catch (error) {
+      return 'неизвестно'
+    }
   }
 
   const handleDeliveryChoice = async (method) => {
     setDeliveryMethod(method)
 
-    // Отправляем уведомление в Telegram
-    const botToken = '8274559349:AAF0sxzIsm3BMdc8geKllXSRed6xihkK9V4'
-    const chatId = '5344758315'
-    const methodText = method === 'delivery' ? 'Доставка' : 'Лично'
-    const message = `🌸 Цветы приняты!\n\nСпособ получения: ${methodText}\nВремя: ${new Date().toLocaleString('ru-RU')}`
-
+    // Логируем выбор через новую систему логирования
     try {
-      await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          parse_mode: 'HTML'
-        })
+      logDeliveryChoice(method)
+
+      // Дополнительно логируем клик по кнопке
+      const methodText = method === 'delivery' ? 'Доставка' : 'Лично'
+      logButtonClick(`Выбор доставки: ${methodText}`, {
+        'Способ': methodText,
+        'Время на сайте': getSessionDuration()
       })
     } catch (error) {
-      console.log('Telegram notification failed:', error)
-      // Продолжаем работу даже если уведомление не отправилось
+      // Тихо игнорируем ошибки логирования
     }
 
     // Воспроизводим тихий звук колокольчика (если есть)
