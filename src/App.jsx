@@ -375,13 +375,16 @@ function App() {
           {/* Приветственный экран */}
           <SceneBlock key="intro" isVisible={currentScene === -1}>
             <div className="intro-text">
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.3 }}
-              >
-                Письмо для тебя
-              </motion.h1>
+              <h1>
+                <span className="typing-text">
+                  <span className="line">Письмо для</span>
+                  <span className="line">тебя</span>
+                </span>
+              </h1>
+
+              <p className="scroll-hint">
+                листай вниз
+              </p>
 
               <button
                 className="letter-btn"
@@ -391,11 +394,8 @@ function App() {
                 }}
               >
                 Мысли вслух
+                <span className="letter-badge">4</span>
               </button>
-
-              <p className="scroll-hint">
-                листай вниз
-              </p>
             </div>
           </SceneBlock>
 
