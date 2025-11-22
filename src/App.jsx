@@ -383,14 +383,9 @@ function App() {
               >
                 Письмо для тебя
               </motion.h1>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.7 }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="scroll-hint"
-              >
-                листай вниз
-              </motion.p>
+              <p className="scroll-hint">
+                листай вниз или нажимай справа
+              </p>
             </div>
           </SceneBlock>
 
