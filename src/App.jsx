@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent } from 'framer-motion'
 import './App.css'
 import FloatingParticles from './components/FloatingParticles'
@@ -415,64 +415,36 @@ function App() {
 }
 
 // Компонент блока сцены с анимациями появления/исчезновения
-function SceneBlock({ children, isVisible }) {
+const SceneBlock = React.memo(({ children, isVisible }) => {
   return (
-    <motion.div
-      className="scene-block"
-      initial={{ opacity: 0, filter: 'blur(10px)' }}
-      animate={{
-        opacity: isVisible ? 1 : 0.3,
-        filter: isVisible ? 'blur(0px)' : 'blur(10px)',
-        y: isVisible ? 0 : 30
-      }}
-      transition={{
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1]
-      }}
-    >
+    <div className="scene-block">
       {children}
-    </motion.div>
+    </div>
   )
-}
+})
 
 // Компонент карточки письма
-function LetterCard({ scene, index }) {
+const LetterCard = React.memo(({ scene, index }) => {
   return (
-    <motion.div
+    <div
       className="letter-card"
       style={{
         transform: `rotate(${(index % 2 === 0 ? 1 : -1) * 0.5}deg)`
       }}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: 0.2 }}
     >
       {/* Цитата "её" */}
-      <motion.div
-        className="her-quote"
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: false }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-      >
+      <div className="her-quote">
         <div className="quote-mark">"</div>
         <p>{scene.her}</p>
         <div className="quote-underline" />
-      </motion.div>
+      </div>
 
       {/* Мой ответ */}
-      <motion.div
-        className="my-response"
-        initial={{ opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: false }}
-        transition={{ duration: 0.6, delay: 0.7 }}
-      >
+      <div className="my-response">
         <p>{scene.me}</p>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
-}
+})
 
 export default App
