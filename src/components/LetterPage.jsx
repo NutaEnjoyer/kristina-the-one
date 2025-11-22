@@ -1,9 +1,40 @@
 import { useState } from 'react'
 import './LetterPage.css'
-import { letterText } from '../letterText'
+import { letters } from '../letterText'
+import { logLetterOpen } from '../utils/logger'
 
 // Полноэкранная страница письма
 export function LetterPageFull({ onClose }) {
+  const [selectedLetter, setSelectedLetter] = useState(null)
+
+  // Обработчик открытия письма с логированием
+  const handleLetterOpen = (letter) => {
+    setSelectedLetter(letter)
+    logLetterOpen(letter.id, letter.title)
+  }
+
+  // Если письмо выбрано, показываем его
+  if (selectedLetter) {
+    return (
+      <div className="letter-page-full">
+        <div className="letter-full-container">
+          <button className="back-btn" onClick={() => setSelectedLetter(null)}>
+            ← К списку
+          </button>
+
+          <h1 className="letter-title">{selectedLetter.title}</h1>
+
+          <div className="letter-full-text">
+            {selectedLetter.text.split('\n').map((paragraph, index) => (
+              paragraph.trim() ? <p key={index}>{paragraph}</p> : <br key={index} />
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Иначе показываем список писем
   return (
     <div className="letter-page-full">
       <div className="letter-full-container">
@@ -11,11 +42,19 @@ export function LetterPageFull({ onClose }) {
           ← Назад
         </button>
 
-        <h1 className="letter-title">Моё письмо</h1>
+        <h1 className="letter-title">Мои письма</h1>
 
-        <div className="letter-full-text">
-          {letterText.split('\n').map((paragraph, index) => (
-            paragraph.trim() ? <p key={index}>{paragraph}</p> : <br key={index} />
+        <div className="letters-list">
+          {letters.map(letter => (
+            <button
+              key={letter.id}
+              className="letter-item"
+              onClick={() => handleLetterOpen(letter)}
+            >
+              <span className="letter-number">{letter.id}</span>
+              <span className="letter-item-title">{letter.title}</span>
+              <span className="letter-arrow">→</span>
+            </button>
           ))}
         </div>
       </div>
