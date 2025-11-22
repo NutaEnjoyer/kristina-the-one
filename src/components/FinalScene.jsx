@@ -17,7 +17,6 @@ function FinalScene() {
     { id: 'peonies', name: 'Пионы' },
     { id: 'lilies', name: 'Лилии' },
     { id: 'orchids', name: 'Орхидеи' },
-    { id: 'sunflowers', name: 'Подсолнухи' },
     { id: 'daisies', name: 'Ромашки' },
     { id: 'lavender', name: 'Лаванда' },
     { id: 'surprise', name: 'Сюрприз' }
@@ -110,6 +109,14 @@ function FinalScene() {
             <span className="subtle">Всё в твоём темпе.</span>
           </p>
 
+          <div className="photo-container">
+            <img
+              src="/our-photo.jpg"
+              alt="Мы вместе"
+              className="our-photo"
+            />
+          </div>
+
           <button
             className="take-flowers-btn"
             onClick={handleTakeFlowers}
@@ -161,7 +168,7 @@ function FinalScene() {
           {showThanks && (
             <div className="thanks-message">
               <p>Спасибо.</p>
-              <p className="respect">Я уважаю твоё пространство.</p>
+              <p className="respect">Я люблю тебя.</p>
             </div>
           )}
         </div>
