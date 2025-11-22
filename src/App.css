@@ -120,6 +120,14 @@
   transform-style: preserve-3d;
 }
 
+/* На мобильных сдвигаем блоки чуть ниже */
+@media (max-width: 768px) {
+  .scene-block {
+    align-items: flex-start;
+    padding-top: 25vh; /* Начинаем с 25% высоты экрана сверху */
+  }
+}
+
 /* ===== ПРИВЕТСТВЕННЫЙ ЭКРАН ===== */
 
 .intro-text {
