@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent } from 'framer-motion'
 import './App.css'
 import FloatingParticles from './components/FloatingParticles'
 import FinalScene from './components/FinalScene'
@@ -104,11 +104,18 @@ const scenes = [
 function App() {
   const [currentScene, setCurrentScene] = useState(-1) // -1 = intro screen
   const [showFinal, setShowFinal] = useState(false)
+  const [progressPercent, setProgressPercent] = useState(0)
   const containerRef = useRef(null)
   const sceneStartTimeRef = useRef(Date.now())
   const lastLoggedSceneRef = useRef(-1)
   const { scrollYProgress } = useScroll({
     container: containerRef
+  })
+
+  // Обновляем прогресс только при изменении (избегаем лишних рендеров)
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const percent = Math.round(latest * 100)
+    setProgressPercent(percent)
   })
 
   // Логирование посещения сайта
@@ -298,30 +305,8 @@ function App() {
     return () => unsubscribe()
   }, [scrollYProgress, currentScene])
 
-  // Навигация по тапу
-  const handleTapNavigation = (e) => {
-    try {
-      const containerElement = containerRef.current
-      if (!containerElement) return
-
-      const clickX = e.clientX || e.touches?.[0]?.clientX
-      const screenWidth = window.innerWidth
-
-      // Определяем зону клика
-      if (clickX < screenWidth * 0.3) {
-        // Левая треть - предыдущая сцена
-        navigateToScene(currentScene - 1)
-      } else if (clickX > screenWidth * 0.7) {
-        // Правая треть - следующая сцена
-        navigateToScene(currentScene + 1)
-      }
-    } catch (error) {
-      // Игнорируем ошибки
-    }
-  }
-
-  // Функция навигации к определённой сцене
-  const navigateToScene = (targetScene) => {
+  // Функция навигации к определённой сцене (мемоизируем)
+  const navigateToScene = useCallback((targetScene) => {
     try {
       const containerElement = containerRef.current
       if (!containerElement) return
@@ -342,10 +327,29 @@ function App() {
     } catch (error) {
       // Игнорируем ошибки
     }
-  }
+  }, [scenes.length])
 
-  // Вычисляем прогресс
-  const progressPercent = Math.round(scrollYProgress.get() * 100)
+  // Навигация по тапу (мемоизируем)
+  const handleTapNavigation = useCallback((e) => {
+    try {
+      const containerElement = containerRef.current
+      if (!containerElement) return
+
+      const clickX = e.clientX || e.touches?.[0]?.clientX
+      const screenWidth = window.innerWidth
+
+      // Определяем зону клика
+      if (clickX < screenWidth * 0.3) {
+        // Левая треть - предыдущая сцена
+        navigateToScene(currentScene - 1)
+      } else if (clickX > screenWidth * 0.7) {
+        // Правая треть - следующая сцена
+        navigateToScene(currentScene + 1)
+      }
+    } catch (error) {
+      // Игнорируем ошибки
+    }
+  }, [currentScene, navigateToScene])
 
   return (
     <div className="app">
