@@ -275,7 +275,7 @@ function App() {
             // Звук перелистывания страницы
             try {
               const audio = new Audio('/page-turn.mp3')
-              audio.volume = 0.3 // 30% громкости
+              audio.volume = 0.1 // 10% громкости
               audio.play().catch(() => {
                 // Игнорируем если звук не загрузился
               })
