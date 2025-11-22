@@ -345,27 +345,7 @@ function App() {
     }
   }, [scenes.length])
 
-  // Навигация по тапу (мемоизируем)
-  const handleTapNavigation = useCallback((e) => {
-    try {
-      const containerElement = containerRef.current
-      if (!containerElement) return
-
-      const clickX = e.clientX || e.touches?.[0]?.clientX
-      const screenWidth = window.innerWidth
-
-      // Определяем зону клика
-      if (clickX < screenWidth * 0.3) {
-        // Левая треть - предыдущая сцена
-        navigateToScene(currentScene - 1)
-      } else if (clickX > screenWidth * 0.7) {
-        // Правая треть - следующая сцена
-        navigateToScene(currentScene + 1)
-      }
-    } catch (error) {
-      // Игнорируем ошибки
-    }
-  }, [currentScene, navigateToScene])
+  // Навигация по тапу отключена - только скролл
 
   // Если показываем страницу письма, рендерим только её
   if (showLetterPage) {
@@ -390,8 +370,6 @@ function App() {
       <div
         className="scroll-container"
         ref={containerRef}
-        onClick={handleTapNavigation}
-        onTouchEnd={handleTapNavigation}
       >
         <div className="scenes-wrapper">
           {/* Приветственный экран */}
@@ -416,7 +394,7 @@ function App() {
               </button>
 
               <p className="scroll-hint">
-                листай вниз или нажимай справа
+                листай вниз
               </p>
             </div>
           </SceneBlock>
