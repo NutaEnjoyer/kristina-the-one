@@ -4,19 +4,48 @@ import './FinalScene.css'
 import { logButtonClick, logDeliveryChoice } from '../utils/logger'
 
 function FinalScene() {
+  const [showFlowerChoice, setShowFlowerChoice] = useState(false)
   const [showDeliveryChoice, setShowDeliveryChoice] = useState(false)
   const [showBouquet, setShowBouquet] = useState(false)
   const [showThanks, setShowThanks] = useState(false)
+  const [selectedFlower, setSelectedFlower] = useState('')
   const [deliveryMethod, setDeliveryMethod] = useState('')
+
+  // Варианты цветов (минималистично, без эмодзи)
+  const flowerOptions = [
+    { id: 'roses', name: 'Розы' },
+    { id: 'tulips', name: 'Тюльпаны' },
+    { id: 'peonies', name: 'Пионы' },
+    { id: 'lilies', name: 'Лилии' },
+    { id: 'orchids', name: 'Орхидеи' },
+    { id: 'sunflowers', name: 'Подсолнухи' },
+    { id: 'daisies', name: 'Ромашки' },
+    { id: 'lavender', name: 'Лаванда' },
+    { id: 'surprise', name: 'Сюрприз' }
+  ]
 
   const handleTakeFlowers = () => {
     try {
-      logButtonClick('Забрать цветы', {
+      logButtonClick('Получить цветы', {
         'Время на сайте': getSessionDuration()
       })
     } catch (error) {
       // Тихо игнорируем ошибки
     }
+    setShowFlowerChoice(true)
+  }
+
+  const handleFlowerChoice = (flower) => {
+    try {
+      logButtonClick(`Выбор цветов: ${flower.name}`, {
+        'Цветы': flower.name,
+        'Время на сайте': getSessionDuration()
+      })
+    } catch (error) {
+      // Тихо игнорируем ошибки
+    }
+    setSelectedFlower(flower)
+    setShowFlowerChoice(false)
     setShowDeliveryChoice(true)
   }
 
@@ -48,6 +77,7 @@ function FinalScene() {
       const methodText = method === 'delivery' ? 'Доставка' : 'Лично'
       logButtonClick(`Выбор доставки: ${methodText}`, {
         'Способ': methodText,
+        'Цветы': selectedFlower.name || 'Не выбрано',
         'Время на сайте': getSessionDuration()
       })
     } catch (error) {
@@ -74,7 +104,7 @@ function FinalScene() {
   return (
     <div className="final-scene">
       <AnimatePresence mode="wait">
-        {!showDeliveryChoice ? (
+        {!showFlowerChoice && !showDeliveryChoice ? (
           <motion.div
             key="invitation"
             className="invitation"
@@ -103,10 +133,50 @@ function FinalScene() {
               whileHover={{ scale: 1.05, boxShadow: '0 10px 40px rgba(255, 192, 203, 0.4)' }}
               whileTap={{ scale: 0.95 }}
             >
-              Забрать цветы
+              Получить цветы
             </motion.button>
           </motion.div>
-        ) : !showBouquet ? (
+        ) : showFlowerChoice ? (
+          <motion.div
+            key="flower-choice"
+            className="flower-choice"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.p
+              className="flower-message"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Какие цветы ты хочешь?
+            </motion.p>
+
+            <motion.div
+              className="flower-grid"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              {flowerOptions.map((flower, index) => (
+                <motion.button
+                  key={flower.id}
+                  className="flower-btn"
+                  onClick={() => handleFlowerChoice(flower)}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.6 + index * 0.05 }}
+                  whileHover={{ scale: 1.05, boxShadow: '0 10px 40px rgba(255, 192, 203, 0.5)' }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {flower.name}
+                </motion.button>
+              ))}
+            </motion.div>
+          </motion.div>
+        ) : showDeliveryChoice && !showBouquet ? (
           <motion.div
             key="delivery-choice"
             className="delivery-choice"
