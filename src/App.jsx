@@ -278,28 +278,6 @@ function App() {
         if (newScene !== lastLoggedSceneRef.current && newScene >= 0) {
           logSceneReached(newScene, scenes[newScene].her)
 
-          // Тактильная и звуковая обратная связь при смене сцены
-          try {
-            // Вибрация (если поддерживается)
-            if (navigator.vibrate) {
-              navigator.vibrate(50) // Короткая вибрация 50мс
-            }
-
-            // Звук перелистывания страницы
-            try {
-              if (audioRef.current) {
-                audioRef.current.currentTime = 0 // Сбрасываем на начало
-                audioRef.current.play().catch(() => {
-                  // Игнорируем если звук не загрузился
-                })
-              }
-            } catch (e) {
-              // Игнорируем ошибки со звуком
-            }
-          } catch (error) {
-            // Игнорируем ошибки
-          }
-
           // Логируем время, проведенное на предыдущей сцене
           if (lastLoggedSceneRef.current >= 0) {
             const dwellTime = Date.now() - sceneStartTimeRef.current
