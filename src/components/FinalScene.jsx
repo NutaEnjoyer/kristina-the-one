@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import './FinalScene.css'
 import { logButtonClick, logDeliveryChoice } from '../utils/logger'
 
@@ -103,145 +102,70 @@ function FinalScene() {
 
   return (
     <div className="final-scene">
-      <AnimatePresence mode="wait">
-        {!showFlowerChoice && !showDeliveryChoice ? (
-          <motion.div
-            key="invitation"
-            className="invitation"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.p
-              className="final-message"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-            >
-              Я рядом, когда ты будешь готова к спокойному и честному разговору
-              <br />
-              <span className="subtle">Всё в твоём темпе.</span>
-            </motion.p>
+      {!showFlowerChoice && !showDeliveryChoice ? (
+        <div className="invitation">
+          <p className="final-message">
+            Я рядом, когда ты будешь готова к спокойному и честному разговору
+            <br />
+            <span className="subtle">Всё в твоём темпе.</span>
+          </p>
 
-            <motion.button
-              className="take-flowers-btn"
-              onClick={handleTakeFlowers}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ scale: 1.05, boxShadow: '0 10px 40px rgba(255, 192, 203, 0.4)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Получить цветы
-            </motion.button>
-          </motion.div>
-        ) : showFlowerChoice ? (
-          <motion.div
-            key="flower-choice"
-            className="flower-choice"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.8 }}
+          <button
+            className="take-flowers-btn"
+            onClick={handleTakeFlowers}
           >
-            <motion.p
-              className="flower-message"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Какие цветы ты хочешь?
-            </motion.p>
+            Получить цветы
+          </button>
+        </div>
+      ) : showFlowerChoice ? (
+        <div className="flower-choice">
+          <p className="flower-message">
+            Какие цветы ты хочешь?
+          </p>
 
-            <motion.div
-              className="flower-grid"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              {flowerOptions.map((flower, index) => (
-                <motion.button
-                  key={flower.id}
-                  className="flower-btn"
-                  onClick={() => handleFlowerChoice(flower)}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.6 + index * 0.05 }}
-                  whileHover={{ scale: 1.05, boxShadow: '0 10px 40px rgba(255, 192, 203, 0.5)' }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {flower.name}
-                </motion.button>
-              ))}
-            </motion.div>
-          </motion.div>
-        ) : showDeliveryChoice && !showBouquet ? (
-          <motion.div
-            key="delivery-choice"
-            className="delivery-choice"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.p
-              className="delivery-message"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Как ты хочешь получить цветы?
-            </motion.p>
-
-            <motion.div
-              className="delivery-buttons"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <motion.button
-                className="delivery-btn"
-                onClick={() => handleDeliveryChoice('delivery')}
-                whileHover={{ scale: 1.05, boxShadow: '0 10px 40px rgba(255, 192, 203, 0.4)' }}
-                whileTap={{ scale: 0.95 }}
+          <div className="flower-grid">
+            {flowerOptions.map((flower) => (
+              <button
+                key={flower.id}
+                className="flower-btn"
+                onClick={() => handleFlowerChoice(flower)}
               >
-                Доставка
-              </motion.button>
-              <motion.button
-                className="delivery-btn"
-                onClick={() => handleDeliveryChoice('personal')}
-                whileHover={{ scale: 1.05, boxShadow: '0 10px 40px rgba(255, 192, 203, 0.4)' }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Лично
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="thanks"
-            className="thanks-container"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <AnimatePresence>
-              {showThanks && (
-                <motion.div
-                  className="thanks-message"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  <p>Спасибо.</p>
-                  <p className="respect">Я уважаю твоё пространство.</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {flower.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : showDeliveryChoice && !showBouquet ? (
+        <div className="delivery-choice">
+          <p className="delivery-message">
+            Как ты хочешь получить цветы?
+          </p>
+
+          <div className="delivery-buttons">
+            <button
+              className="delivery-btn"
+              onClick={() => handleDeliveryChoice('delivery')}
+            >
+              Доставка
+            </button>
+            <button
+              className="delivery-btn"
+              onClick={() => handleDeliveryChoice('personal')}
+            >
+              Лично
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="thanks-container">
+          {showThanks && (
+            <div className="thanks-message">
+              <p>Спасибо.</p>
+              <p className="respect">Я уважаю твоё пространство.</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
