@@ -326,18 +326,39 @@ function App() {
       if (!containerElement) return
 
       const totalScenes = scenes.length + 2
-      let scrollTarget = 0
 
       if (targetScene < -1) return // Не идём дальше intro
       if (targetScene >= scenes.length) targetScene = scenes.length // Финальная сцена
 
-      // Вычисляем позицию скролла для нужной сцены
-      scrollTarget = ((targetScene + 1) / totalScenes) * containerElement.scrollHeight
+      // Воспроизводим звук сразу
+      try {
+        if (audioRef.current) {
+          audioRef.current.currentTime = 0
+          audioRef.current.play().catch(() => {})
+        }
+      } catch (e) {
+        // Игнорируем ошибки со звуком
+      }
 
-      containerElement.scrollTo({
-        top: scrollTarget,
-        behavior: 'smooth'
-      })
+      // Вибрация
+      try {
+        if (navigator.vibrate) {
+          navigator.vibrate(50)
+        }
+      } catch (e) {
+        // Игнорируем
+      }
+
+      // Задержка перед переходом (0.3-0.4 секунды)
+      setTimeout(() => {
+        // Вычисляем позицию скролла для нужной сцены
+        const scrollTarget = ((targetScene + 1) / totalScenes) * containerElement.scrollHeight
+
+        containerElement.scrollTo({
+          top: scrollTarget,
+          behavior: 'smooth'
+        })
+      }, 350) // 350ms задержка
     } catch (error) {
       // Игнорируем ошибки
     }
