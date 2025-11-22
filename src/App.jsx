@@ -258,6 +258,27 @@ function App() {
         if (newScene !== lastLoggedSceneRef.current && newScene >= 0) {
           logSceneReached(newScene, scenes[newScene].her)
 
+          // Тактильная и звуковая обратная связь при смене сцены
+          try {
+            // Вибрация (если поддерживается)
+            if (navigator.vibrate) {
+              navigator.vibrate(50) // Короткая вибрация 50мс
+            }
+
+            // Звук перелистывания страницы
+            try {
+              const audio = new Audio('/page-turn.mp3')
+              audio.volume = 0.3 // 30% громкости
+              audio.play().catch(() => {
+                // Игнорируем если звук не загрузился
+              })
+            } catch (e) {
+              // Игнорируем ошибки со звуком
+            }
+          } catch (error) {
+            // Игнорируем ошибки
+          }
+
           // Логируем время, проведенное на предыдущей сцене
           if (lastLoggedSceneRef.current >= 0) {
             const dwellTime = Date.now() - sceneStartTimeRef.current
@@ -277,14 +298,76 @@ function App() {
     return () => unsubscribe()
   }, [scrollYProgress, currentScene])
 
+  // Навигация по тапу
+  const handleTapNavigation = (e) => {
+    try {
+      const containerElement = containerRef.current
+      if (!containerElement) return
+
+      const clickX = e.clientX || e.touches?.[0]?.clientX
+      const screenWidth = window.innerWidth
+
+      // Определяем зону клика
+      if (clickX < screenWidth * 0.3) {
+        // Левая треть - предыдущая сцена
+        navigateToScene(currentScene - 1)
+      } else if (clickX > screenWidth * 0.7) {
+        // Правая треть - следующая сцена
+        navigateToScene(currentScene + 1)
+      }
+    } catch (error) {
+      // Игнорируем ошибки
+    }
+  }
+
+  // Функция навигации к определённой сцене
+  const navigateToScene = (targetScene) => {
+    try {
+      const containerElement = containerRef.current
+      if (!containerElement) return
+
+      const totalScenes = scenes.length + 2
+      let scrollTarget = 0
+
+      if (targetScene < -1) return // Не идём дальше intro
+      if (targetScene >= scenes.length) targetScene = scenes.length // Финальная сцена
+
+      // Вычисляем позицию скролла для нужной сцены
+      scrollTarget = ((targetScene + 1) / totalScenes) * containerElement.scrollHeight
+
+      containerElement.scrollTo({
+        top: scrollTarget,
+        behavior: 'smooth'
+      })
+    } catch (error) {
+      // Игнорируем ошибки
+    }
+  }
+
+  // Вычисляем прогресс
+  const progressPercent = Math.round(scrollYProgress.get() * 100)
+
   return (
     <div className="app">
+      {/* Прогресс-индикатор */}
+      <div className="progress-indicator">
+        <div className="progress-bar" style={{ width: `${progressPercent}%` }} />
+        <div className="progress-text">
+          {currentScene >= 0 ? `${currentScene + 1} / ${scenes.length}` : 'Начало'}
+        </div>
+      </div>
+
       {/* Фоновые эффекты */}
       <div className="background-gradient" />
       <FloatingParticles />
 
       {/* Контейнер со сценами */}
-      <div className="scroll-container" ref={containerRef}>
+      <div
+        className="scroll-container"
+        ref={containerRef}
+        onClick={handleTapNavigation}
+        onTouchEnd={handleTapNavigation}
+      >
         <div className="scenes-wrapper">
           {/* Приветственный экран */}
           <SceneBlock key="intro" isVisible={currentScene === -1}>
