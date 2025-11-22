@@ -332,7 +332,8 @@ function App() {
       // Задержка перед переходом (0.3-0.4 секунды)
       setTimeout(() => {
         // Вычисляем позицию скролла для нужной сцены
-        const scrollTarget = ((targetScene + 1) / totalScenes) * containerElement.scrollHeight
+        const totalHeight = containerElement.scrollHeight - containerElement.clientHeight
+        const scrollTarget = ((targetScene + 1) / totalScenes) * totalHeight
 
         containerElement.scrollTo({
           top: scrollTarget,

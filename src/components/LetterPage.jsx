@@ -42,7 +42,7 @@ export function LetterPageFull({ onClose }) {
           ← Назад
         </button>
 
-        <h1 className="letter-title">Мои письма</h1>
+        <h1 className="letter-title">Мои записи</h1>
 
         <div className="letters-list">
           {letters.map(letter => (
