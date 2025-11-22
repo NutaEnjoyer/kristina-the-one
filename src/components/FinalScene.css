@@ -73,26 +73,31 @@
 
 .flower-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  max-width: 500px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
 .flower-btn {
-  padding: 16px 20px;
-  font-size: 0.95rem;
+  padding: 18px 50px;
+  font-size: 1.2rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 192, 203, 0.3);
-  border-radius: 12px;
+  background: rgba(255, 192, 203, 0.2);
+  border: 2px solid rgba(255, 192, 203, 0.5);
+  border-radius: 50px;
   color: #d4669a;
   cursor: pointer;
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(255, 192, 203, 0.1);
+  box-shadow: 0 8px 32px rgba(255, 192, 203, 0.2);
   transition: all 0.3s ease;
   text-align: center;
+}
+
+.flower-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(255, 192, 203, 0.3);
 }
 
 /* Экран выбора доставки */
@@ -182,15 +187,14 @@
   }
 
   .flower-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
     max-width: 100%;
   }
 
   .flower-btn {
-    padding: 14px 12px;
-    font-size: 0.85rem;
-    border-radius: 10px;
+    padding: 15px 40px;
+    font-size: 1rem;
   }
 
   .delivery-message {
