@@ -537,6 +537,23 @@ export function logError(error, errorInfo) {
   }
 }
 
+// Логирование открытия письма
+export function logLetterOpen(letterId, letterTitle) {
+  try {
+    const message = `📖 ПИСЬМО ОТКРЫТО\n\n` +
+      `📝 Письмо #${letterId}: <b>${letterTitle}</b>\n` +
+      `⏰ Время открытия: ${new Date().toLocaleString('ru-RU', { dateStyle: 'full', timeStyle: 'medium' })}\n` +
+      `⌛ Время на сайте: ${getSessionDuration()}\n` +
+      `📊 Просмотрено сцен: ${sessionStorage.getItem('viewed-scenes') ? JSON.parse(sessionStorage.getItem('viewed-scenes')).length : 0}\n` +
+      `📜 Последний скролл: ${sessionStorage.getItem('last-scroll') || '0'}%\n\n` +
+      `💌 Пользователь начал читать письмо!`
+
+    sendToTelegram(message)
+  } catch (error) {
+    // Тихо игнорируем ошибки
+  }
+}
+
 // Экспорт для общего использования
 export default {
   logVisit,
@@ -551,5 +568,6 @@ export default {
   resetInactivityTimer,
   logPageFocus,
   logWindowResize,
-  logError
+  logError,
+  logLetterOpen
 }
