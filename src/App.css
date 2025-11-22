@@ -145,6 +145,29 @@
   text-shadow: 0 2px 20px rgba(255, 192, 203, 0.3);
 }
 
+.letter-btn {
+  display: inline-block;
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: rgba(255, 192, 203, 0.2);
+  border: 2px solid rgba(255, 192, 203, 0.5);
+  border-radius: 50px;
+  color: #d4669a;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(255, 192, 203, 0.2);
+  transition: all 0.3s ease;
+  margin: 40px 0;
+  text-decoration: none;
+}
+
+.letter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(255, 192, 203, 0.4);
+}
+
 .scroll-hint {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
@@ -272,6 +295,12 @@
 @media (max-width: 768px) {
   .intro-text h1 {
     font-size: 2.5rem;
+  }
+
+  .letter-btn {
+    padding: 15px 40px;
+    font-size: 1rem;
+    margin: 30px 0;
   }
 
   .letter-card {
