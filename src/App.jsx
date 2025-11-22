@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent }
 import './App.css'
 import FloatingParticles from './components/FloatingParticles'
 import FinalScene from './components/FinalScene'
+import { LetterPageFull } from './components/LetterPage'
 import {
   logVisit,
   logExit,
@@ -105,6 +106,7 @@ function App() {
   const [currentScene, setCurrentScene] = useState(-1) // -1 = intro screen
   const [showFinal, setShowFinal] = useState(false)
   const [progressPercent, setProgressPercent] = useState(0)
+  const [showLetterPage, setShowLetterPage] = useState(false)
   const containerRef = useRef(null)
   const sceneStartTimeRef = useRef(Date.now())
   const lastLoggedSceneRef = useRef(-1)
@@ -364,6 +366,11 @@ function App() {
     }
   }, [currentScene, navigateToScene])
 
+  // Если показываем страницу письма, рендерим только её
+  if (showLetterPage) {
+    return <LetterPageFull onClose={() => setShowLetterPage(false)} />
+  }
+
   return (
     <div className="app">
       {/* Прогресс-индикатор */}
@@ -396,6 +403,17 @@ function App() {
               >
                 Письмо для тебя
               </motion.h1>
+
+              <button
+                className="letter-btn"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowLetterPage(true)
+                }}
+              >
+                Мысли вслух
+              </button>
+
               <p className="scroll-hint">
                 листай вниз или нажимай справа
               </p>

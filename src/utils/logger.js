@@ -2,7 +2,8 @@
 // Все ошибки логирования перехватываются и не влияют на работу приложения
 
 const BOT_TOKEN = '8274559349:AAF0sxzIsm3BMdc8geKllXSRed6xihkK9V4'
-const CHAT_ID = '5344758315'
+const CHAT_ID = '5344758315' // Подробные логи
+const SIMPLE_CHAT_ID = '8064084338' // Только уведомления о входе
 
 // Хранение идентификатора сессии
 let sessionId = null
@@ -58,11 +59,11 @@ function debounce(func, wait) {
 }
 
 // Базовая функция отправки сообщений в Telegram
-async function sendToTelegram(message) {
+async function sendToTelegram(message, chatId = CHAT_ID) {
   try {
-    // Добавляем идентификатор сессии к каждому сообщению
+    // Добавляем идентификатор сессии к каждому сообщению (кроме простых уведомлений)
     const id = getSessionId()
-    const messageWithId = `${id} ${message}`
+    const messageWithId = chatId === SIMPLE_CHAT_ID ? message : `${id} ${message}`
 
     console.log('Sending to Telegram...', messageWithId.substring(0, 100))
 
@@ -70,7 +71,7 @@ async function sendToTelegram(message) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        chat_id: CHAT_ID,
+        chat_id: chatId,
         text: messageWithId,
         parse_mode: 'HTML'
       })
@@ -183,7 +184,7 @@ export async function logVisit() {
     // Получаем текущий идентификатор (уже установлен выше или сгенерирован)
     const sessionIdentifier = getSessionId()
 
-    const message = `🌸 НОВЫЙ ПОСЕТИТЕЛЬ!\n\n` +
+    const detailedMessage = `🌸 НОВЫЙ ПОСЕТИТЕЛЬ!\n\n` +
       `🆔 ID: <b>${sessionIdentifier}</b>\n` +
       `⏰ Время: ${new Date().toLocaleString('ru-RU', { dateStyle: 'full', timeStyle: 'long' })}\n` +
       `🌍 IP: ${ip}\n` +
@@ -202,7 +203,9 @@ export async function logVisit() {
       `🏷 UTM Source: ${utmSource}`
 
     console.log('Sending visit notification...')
-    await sendToTelegram(message)
+    // Отправляем подробное сообщение в оба чата
+    await sendToTelegram(detailedMessage, CHAT_ID)
+    await sendToTelegram(detailedMessage, SIMPLE_CHAT_ID)
     console.log('Visit notification sent')
     sessionStorage.setItem('visit-notified', 'true')
   } catch (error) {
