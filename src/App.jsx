@@ -108,6 +108,7 @@ function App() {
   const containerRef = useRef(null)
   const sceneStartTimeRef = useRef(Date.now())
   const lastLoggedSceneRef = useRef(-1)
+  const audioRef = useRef(null) // Ref для предзагруженного звука
   const { scrollYProgress } = useScroll({
     container: containerRef
   })
@@ -117,6 +118,18 @@ function App() {
     const percent = Math.round(latest * 100)
     setProgressPercent(percent)
   })
+
+  // Предзагрузка звука
+  useEffect(() => {
+    try {
+      const audio = new Audio('/page-turn.mp3')
+      audio.volume = 0.1
+      audio.load() // Предзагружаем
+      audioRef.current = audio
+    } catch (error) {
+      // Игнорируем ошибки
+    }
+  }, [])
 
   // Логирование посещения сайта
   useEffect(() => {
@@ -274,11 +287,12 @@ function App() {
 
             // Звук перелистывания страницы
             try {
-              const audio = new Audio('/page-turn.mp3')
-              audio.volume = 0.1 // 10% громкости
-              audio.play().catch(() => {
-                // Игнорируем если звук не загрузился
-              })
+              if (audioRef.current) {
+                audioRef.current.currentTime = 0 // Сбрасываем на начало
+                audioRef.current.play().catch(() => {
+                  // Игнорируем если звук не загрузился
+                })
+              }
             } catch (e) {
               // Игнорируем ошибки со звуком
             }
