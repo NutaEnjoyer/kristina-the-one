@@ -98,6 +98,28 @@
   margin-bottom: 20px;
 }
 
+.next-letter-btn {
+  display: block;
+  margin: 40px auto 0;
+  padding: 15px 45px;
+  font-size: 1.1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: rgba(255, 192, 203, 0.2);
+  border: 2px solid rgba(255, 192, 203, 0.5);
+  border-radius: 50px;
+  color: #d4669a;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(255, 192, 203, 0.2);
+  transition: all 0.3s ease;
+}
+
+.next-letter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 192, 203, 0.3);
+}
+
 /* ===== СПИСОК ПИСЕМ ===== */
 
 .letters-list {
@@ -242,6 +264,12 @@
 
   .letter-subtitle {
     font-size: 0.9rem;
+  }
+
+  .next-letter-btn {
+    padding: 12px 35px;
+    font-size: 1rem;
+    margin-top: 30px;
   }
 }
 
