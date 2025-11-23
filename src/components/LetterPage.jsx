@@ -4,7 +4,7 @@ import { letters } from '../letterText'
 import { logLetterOpen } from '../utils/logger'
 
 // Полноэкранная страница письма
-export function LetterPageFull({ onClose }) {
+export function LetterPageFull({ onClose, onShowFlowers }) {
   const [selectedLetter, setSelectedLetter] = useState(null)
 
   // Обработчик открытия письма с логированием
@@ -38,11 +38,8 @@ export function LetterPageFull({ onClose }) {
   return (
     <div className="letter-page-full">
       <div className="letter-full-container">
-        <button className="back-btn" onClick={onClose}>
-          ← Назад
-        </button>
-
         <h1 className="letter-title">Мои записи</h1>
+        <p className="letter-subtitle">Мои мысли. Оставлю их здесь.</p>
 
         <div className="letters-list">
           {letters.map(letter => (
@@ -58,6 +55,10 @@ export function LetterPageFull({ onClose }) {
           ))}
         </div>
       </div>
+
+      <button className="flowers-btn" onClick={onShowFlowers}>
+        Выбрать цветы 🌸
+      </button>
     </div>
   )
 }
