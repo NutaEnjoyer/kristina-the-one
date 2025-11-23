@@ -11,6 +11,8 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
   const handleLetterOpen = (letter) => {
     setSelectedLetter(letter)
     logLetterOpen(letter.id, letter.title)
+    // Скроллим в начало страницы
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   // Если письмо выбрано, показываем его
