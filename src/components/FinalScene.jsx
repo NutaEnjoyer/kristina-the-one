@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './FinalScene.css'
 import { logButtonClick, logDeliveryChoice } from '../utils/logger'
 
-function FinalScene() {
+function FinalScene({ onBack }) {
   const [showFlowerChoice, setShowFlowerChoice] = useState(false)
   const [showDeliveryChoice, setShowDeliveryChoice] = useState(false)
   const [showBouquet, setShowBouquet] = useState(false)
@@ -103,6 +103,12 @@ function FinalScene() {
     <div className="final-scene">
       {!showFlowerChoice && !showDeliveryChoice ? (
         <div className="invitation">
+          {onBack && (
+            <button className="back-to-letters-btn" onClick={onBack}>
+              ← К записям
+            </button>
+          )}
+
           <p className="final-message">
             Я рядом, когда ты будешь готова к спокойному и честному разговору
             <br />

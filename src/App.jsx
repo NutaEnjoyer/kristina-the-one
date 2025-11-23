@@ -106,7 +106,7 @@ function App() {
   const [currentScene, setCurrentScene] = useState(-1) // -1 = intro screen
   const [showFinal, setShowFinal] = useState(false)
   const [progressPercent, setProgressPercent] = useState(0)
-  const [showLetterPage, setShowLetterPage] = useState(false)
+  const [showLetterPage, setShowLetterPage] = useState(true) // Сразу показываем записки
   const containerRef = useRef(null)
   const sceneStartTimeRef = useRef(Date.now())
   const lastLoggedSceneRef = useRef(-1)
@@ -349,7 +349,29 @@ function App() {
 
   // Если показываем страницу письма, рендерим только её
   if (showLetterPage) {
-    return <LetterPageFull onClose={() => setShowLetterPage(false)} />
+    return (
+      <LetterPageFull
+        onClose={() => setShowLetterPage(false)}
+        onShowFlowers={() => {
+          setShowLetterPage(false)
+          setShowFinal(true)
+        }}
+      />
+    )
+  }
+
+  // Если показываем финальную сцену с цветами
+  if (showFinal) {
+    return (
+      <div className="app">
+        <div className="background-gradient" />
+        <FloatingParticles />
+        <FinalScene onBack={() => {
+          setShowFinal(false)
+          setShowLetterPage(true)
+        }} />
+      </div>
+    )
   }
 
   return (

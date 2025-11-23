@@ -66,8 +66,18 @@
   text-align: center;
   color: #d4669a;
   letter-spacing: 2px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   text-shadow: 0 2px 20px rgba(255, 192, 203, 0.3);
+}
+
+.letter-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  text-align: center;
+  color: #999;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
 }
 
 .letter-full-text {
@@ -151,6 +161,32 @@
   transform: translateX(5px);
 }
 
+/* Кнопка выбора цветов */
+.flowers-btn {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: rgba(255, 192, 203, 0.2);
+  border: 2px solid rgba(255, 192, 203, 0.5);
+  border-radius: 50px;
+  color: #d4669a;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(255, 192, 203, 0.2);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.flowers-btn:hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 10px 40px rgba(255, 192, 203, 0.4);
+}
+
 @media (max-width: 768px) {
   .letter-full-container {
     padding: 20px 15px;
@@ -194,6 +230,16 @@
 
   .letter-arrow {
     font-size: 1.3rem;
+  }
+
+  .flowers-btn {
+    bottom: 20px;
+    padding: 15px 40px;
+    font-size: 1rem;
+  }
+
+  .letter-subtitle {
+    font-size: 0.9rem;
   }
 }
 
