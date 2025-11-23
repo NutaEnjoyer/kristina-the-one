@@ -127,12 +127,12 @@ export const letterTextFive = `
 export const letters = [
   {
     id: 1,
-    title: 'Мысли о расставании',
+    title: 'О расставании',
     text: letterText
   },
   {
     id: 2,
-    title: 'Размышления и ошибки',
+    title: 'Об ошибках',
     text: letterTextTwo
   }, 
   {
