@@ -38,8 +38,8 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
   return (
     <div className="letter-page-full">
       <div className="letter-full-container">
-        <h1 className="letter-title">Мои записи</h1>
-        <p className="letter-subtitle">Мои мысли. Оставлю их здесь.</p>
+        <h1 className="letter-title">Записки</h1>
+        <p className="letter-subtitle">Просто мои мысли без нейронок и прочего. Оставлю их здесь.</p>
 
         <div className="letters-list">
           {letters.map(letter => (

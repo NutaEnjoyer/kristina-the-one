@@ -374,70 +374,15 @@ function App() {
     )
   }
 
+  // Если ни письма, ни цветы не показаны, возвращаемся к письмам
   return (
-    <div className="app">
-      {/* Прогресс-индикатор */}
-      <div className="progress-indicator">
-        <div className="progress-bar" style={{ width: `${progressPercent}%` }} />
-        <div className="progress-text">
-          {currentScene >= 0 ? `${currentScene + 1} / ${scenes.length}` : 'Начало'}
-        </div>
-      </div>
-
-      {/* Фоновые эффекты */}
-      <div className="background-gradient" />
-      <FloatingParticles />
-
-      {/* Контейнер со сценами */}
-      <div
-        className="scroll-container"
-        ref={containerRef}
-      >
-        <div className="scenes-wrapper">
-          {/* Приветственный экран */}
-          <SceneBlock key="intro" isVisible={currentScene === -1}>
-            <div className="intro-text">
-              <h1>
-                <span className="typing-text">
-                  <span className="line">Письмо для</span>
-                  <span className="line">тебя</span>
-                </span>
-              </h1>
-
-              <p className="scroll-hint">
-                листай вниз
-              </p>
-
-              <button
-                className="letter-btn"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setShowLetterPage(true)
-                }}
-              >
-                Мысли вслух
-                <span className="letter-badge">4</span>
-              </button>
-            </div>
-          </SceneBlock>
-
-          {/* Основные сцены */}
-          {scenes.map((scene, index) => (
-            <SceneBlock
-              key={index}
-              isVisible={currentScene === index}
-            >
-              <LetterCard scene={scene} index={index} />
-            </SceneBlock>
-          ))}
-
-          {/* Финальная сцена */}
-          <SceneBlock isVisible={showFinal}>
-            <FinalScene />
-          </SceneBlock>
-        </div>
-      </div>
-    </div>
+    <LetterPageFull
+      onClose={() => setShowLetterPage(false)}
+      onShowFlowers={() => {
+        setShowLetterPage(false)
+        setShowFinal(true)
+      }}
+    />
   )
 }
 
