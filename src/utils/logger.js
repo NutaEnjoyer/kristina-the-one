@@ -355,57 +355,6 @@ export function logDeliveryChoice(method) {
   }
 }
 
-// Логирование достижения определенной сцены
-export function logSceneReached(sceneIndex, sceneName) {
-  try {
-    // Сохраняем для использования при выходе
-    sessionStorage.setItem('last-scene', `${sceneIndex + 1}: ${sceneName}`)
-
-    // Подсчитываем просмотренные сцены
-    const viewedScenes = new Set(JSON.parse(sessionStorage.getItem('viewed-scenes') || '[]'))
-    viewedScenes.add(sceneIndex)
-    sessionStorage.setItem('viewed-scenes', JSON.stringify([...viewedScenes]))
-
-    const message = `📖 НОВАЯ СЦЕНА ДОСТИГНУТА\n\n` +
-      `🎬 Сцена ${sceneIndex + 1}\n` +
-      `💬 Вопрос: "${sceneName}"\n` +
-      `⏰ Время: ${new Date().toLocaleString('ru-RU')}\n` +
-      `⌛ Время на сайте: ${getSessionDuration()}\n` +
-      `📊 Просмотрено сцен: ${viewedScenes.size}`
-
-    sendToTelegram(message)
-  } catch (error) {
-    // Тихо игнорируем ошибки
-  }
-}
-
-// Логирование долгого нахождения на сцене
-export function logSceneDwell(sceneIndex, dwellTime) {
-  try {
-    const seconds = Math.round(dwellTime / 1000)
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = seconds % 60
-
-    let timeText = minutes > 0 ? `${minutes} мин ${remainingSeconds} сек` : `${seconds} сек`
-    let emoji = '⏱'
-
-    // Добавляем эмодзи в зависимости от времени
-    if (seconds > 60) emoji = '📚' // Долгое чтение
-    else if (seconds > 30) emoji = '👀' // Внимательный просмотр
-    else emoji = '⏱' // Обычный просмотр
-
-    const message = `${emoji} ЗАДЕРЖАЛСЯ НА СЦЕНЕ\n\n` +
-      `🎬 Сцена ${sceneIndex + 1}\n` +
-      `🕐 Время просмотра: <b>${timeText}</b>\n` +
-      `⏰ ${new Date().toLocaleString('ru-RU')}\n` +
-      `⌛ Общее время на сайте: ${getSessionDuration()}\n\n` +
-      `${seconds > 60 ? '✨ Тщательно читает!' : seconds > 30 ? '💭 Задумался...' : '👁 Быстрый просмотр'}`
-
-    sendToTelegram(message)
-  } catch (error) {
-    // Тихо игнорируем ошибки
-  }
-}
 
 // Вспомогательная функция для вычисления времени сессии
 function getSessionDuration() {
@@ -435,36 +384,6 @@ try {
   // Тихо игнорируем ошибки
 }
 
-// Логирование активности мыши (с debounce)
-let mouseActivityCount = 0
-let lastMouseLogTime = Date.now()
-
-export const logMouseActivity = debounce(() => {
-  try {
-    const now = Date.now()
-    const timeSinceLastLog = now - lastMouseLogTime
-
-    if (timeSinceLastLog > 30000) { // Логируем каждые 30 секунд активности
-      const message = `🖱 АКТИВНОСТЬ МЫШИ\n\n` +
-        `📊 Движений за период: ${mouseActivityCount}\n` +
-        `⏰ ${new Date().toLocaleString('ru-RU')}\n` +
-        `⌛ Время на сайте: ${getSessionDuration()}\n` +
-        `📄 Текущая сцена: ${sessionStorage.getItem('last-scene') || 'Неизвестно'}`
-
-      sendToTelegram(message)
-      lastMouseLogTime = now
-      mouseActivityCount = 0
-    }
-  } catch (error) {
-    // Тихо игнорируем ошибки
-  }
-}, 2000)
-
-// Счетчик движений мыши
-export function trackMouseMovement() {
-  mouseActivityCount++
-  logMouseActivity()
-}
 
 // Логирование времени простоя (неактивности)
 let inactivityTimer = null
@@ -562,9 +481,6 @@ export default {
   logScroll,
   logButtonClick,
   logDeliveryChoice,
-  logSceneReached,
-  logSceneDwell,
-  trackMouseMovement,
   resetInactivityTimer,
   logPageFocus,
   logWindowResize,

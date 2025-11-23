@@ -9,9 +9,6 @@ import {
   logExit,
   logVisibilityChange,
   logScroll,
-  logSceneReached,
-  logSceneDwell,
-  trackMouseMovement,
   resetInactivityTimer,
   logWindowResize,
   logError
@@ -165,7 +162,6 @@ function App() {
   useEffect(() => {
     const handleMouseMove = () => {
       try {
-        trackMouseMovement()
         resetInactivityTimer()
       } catch (error) {
         // Тихо игнорируем ошибки
@@ -276,18 +272,8 @@ function App() {
           setCurrentScene(newScene)
         }
 
-        // Логируем достижение новой сцены
+        // Сохраняем текущую сцену для отслеживания времени
         if (newScene !== lastLoggedSceneRef.current && newScene >= 0) {
-          logSceneReached(newScene, scenes[newScene].her)
-
-          // Логируем время, проведенное на предыдущей сцене
-          if (lastLoggedSceneRef.current >= 0) {
-            const dwellTime = Date.now() - sceneStartTimeRef.current
-            if (dwellTime > 5000) { // Логируем если больше 5 секунд
-              logSceneDwell(lastLoggedSceneRef.current, dwellTime)
-            }
-          }
-
           lastLoggedSceneRef.current = newScene
           sceneStartTimeRef.current = Date.now()
         }

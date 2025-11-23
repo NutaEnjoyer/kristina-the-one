@@ -15,6 +15,10 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
 
   // Если письмо выбрано, показываем его
   if (selectedLetter) {
+    // Находим индекс текущего письма
+    const currentIndex = letters.findIndex(l => l.id === selectedLetter.id)
+    const nextLetter = currentIndex < letters.length - 1 ? letters[currentIndex + 1] : null
+
     return (
       <div className="letter-page-full">
         <div className="letter-full-container">
@@ -29,6 +33,16 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
               paragraph.trim() ? <p key={index}>{paragraph}</p> : <br key={index} />
             ))}
           </div>
+
+          {/* Кнопка перехода к следующему письму */}
+          {nextLetter && (
+            <button
+              className="next-letter-btn"
+              onClick={() => handleLetterOpen(nextLetter)}
+            >
+              Следующая запись →
+            </button>
+          )}
         </div>
       </div>
     )
