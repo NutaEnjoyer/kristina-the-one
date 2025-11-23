@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './LetterPage.css'
 import { letters } from '../letterText'
 import { logLetterOpen } from '../utils/logger'
@@ -6,14 +6,20 @@ import { logLetterOpen } from '../utils/logger'
 // Полноэкранная страница письма
 export function LetterPageFull({ onClose, onShowFlowers }) {
   const [selectedLetter, setSelectedLetter] = useState(null)
+  const containerRef = useRef(null)
 
   // Обработчик открытия письма с логированием
   const handleLetterOpen = (letter) => {
     setSelectedLetter(letter)
     logLetterOpen(letter.id, letter.title)
-    // Скроллим в начало страницы
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  // Скроллим в начало при смене письма
+  useEffect(() => {
+    if (selectedLetter && containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [selectedLetter])
 
   // Если письмо выбрано, показываем его
   if (selectedLetter) {
@@ -22,7 +28,7 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
     const nextLetter = currentIndex < letters.length - 1 ? letters[currentIndex + 1] : null
 
     return (
-      <div className="letter-page-full">
+      <div className="letter-page-full" ref={containerRef}>
         <div className="letter-full-container">
           <button className="back-btn" onClick={() => setSelectedLetter(null)}>
             ← К списку
