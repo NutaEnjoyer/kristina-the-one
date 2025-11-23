@@ -145,9 +145,9 @@ export const letters = [
     title: 'О себе',
     text: letterTextFour
   },
-  {
-    id: 5,
-    title: 'Время лечит',
-    text: letterTextFive
-  }
+//   {
+//     id: 5,
+//     title: 'Время лечит',
+//     text: letterTextFive
+//   }
 ]
