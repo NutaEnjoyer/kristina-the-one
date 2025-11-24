@@ -35,7 +35,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
-  padding-bottom: 120px; /* Отступ снизу для кнопки */
+  padding-bottom: 60px;
   min-height: 100vh;
 }
 
@@ -186,10 +186,8 @@
 
 /* Кнопка выбора цветов */
 .flowers-btn {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
+  display: block;
+  margin: 60px auto 0;
   padding: 18px 50px;
   font-size: 1.2rem;
   font-family: 'Montserrat', sans-serif;
@@ -202,18 +200,17 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(255, 192, 203, 0.2);
   transition: all 0.3s ease;
-  z-index: 100;
 }
 
 .flowers-btn:hover {
-  transform: translateX(-50%) translateY(-2px);
+  transform: translateY(-2px);
   box-shadow: 0 10px 40px rgba(255, 192, 203, 0.4);
 }
 
 @media (max-width: 768px) {
   .letter-full-container {
     padding: 20px 15px;
-    padding-bottom: 100px; /* Больший отступ для мобильных */
+    padding-bottom: 40px;
   }
 
   .back-btn {
@@ -257,7 +254,7 @@
   }
 
   .flowers-btn {
-    bottom: 20px;
+    margin: 40px auto 0;
     padding: 15px 40px;
     font-size: 1rem;
   }
