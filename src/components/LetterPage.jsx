@@ -60,7 +60,7 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
   return (
     <div className="letter-page-full">
       <div className="letter-full-container">
-        <h1 className="letter-title">Записки</h1>
+        <h1 className="letter-title">Дневник</h1>
         <p className="letter-subtitle">Просто мои мысли без нейронок и прочего. Оставлю их здесь.</p>
 
         <div className="letters-list">
