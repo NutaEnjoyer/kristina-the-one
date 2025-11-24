@@ -76,11 +76,11 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
             </button>
           ))}
         </div>
-      </div>
 
-      <button className="flowers-btn" onClick={onShowFlowers}>
-        Выбрать цветы 🌸
-      </button>
+        <button className="flowers-btn" onClick={onShowFlowers}>
+          Выбрать цветы 🌸
+        </button>
+      </div>
     </div>
   )
 }
