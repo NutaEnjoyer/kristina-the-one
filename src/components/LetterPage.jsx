@@ -35,6 +35,7 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
           </button>
 
           <h1 className="letter-title">{selectedLetter.title}</h1>
+          {selectedLetter.date && <p className="letter-full-date">{selectedLetter.date}</p>}
 
           <div className="letter-full-text">
             {selectedLetter.text.split('\n').map((paragraph, index) => (
@@ -72,6 +73,7 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
             >
               <span className="letter-number">{letter.id}</span>
               <span className="letter-item-title">{letter.title}</span>
+              {letter.date && <span className="letter-date">{letter.date}</span>}
               <span className="letter-arrow">→</span>
             </button>
           ))}
