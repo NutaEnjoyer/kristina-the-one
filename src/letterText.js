@@ -337,11 +337,11 @@ export const letters = [
     title: 'Первая неделя',
     text: letterTextWeekResults,
     date: '30.11'
-  },
-  {
-    id: 10,
-    title: 'Неопределенность',
-    text: letterTextWaitingPlan,
-    date: '2.12'
   }
+  // {
+  //   id: 10,
+  //   title: 'Неопределенность',
+  //   text: letterTextWaitingPlan,
+  //   date: '2.12'
+  // }
 ]
