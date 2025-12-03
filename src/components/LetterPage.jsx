@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import './LetterPage.css'
 import { letters } from '../letterText'
-import { logLetterOpen } from '../utils/logger'
+import { logLetterOpen, logButtonClick } from '../utils/logger'
 
 // Полноэкранная страница письма
 export function LetterPageFull({ onClose, onShowFlowers }) {
@@ -79,7 +79,13 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
           ))}
         </div>
 
-        <button className="flowers-btn" onClick={onShowFlowers}>
+        <button className="flowers-btn" onClick={() => {
+          logButtonClick('Выбрать цветы', {
+            source: 'letter-page',
+            lettersViewed: letters.length
+          })
+          onShowFlowers()
+        }}>
           Выбрать цветы 🌸
         </button>
       </div>
