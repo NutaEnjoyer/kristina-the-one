@@ -418,17 +418,14 @@
 /* Хедер с заголовком и тегом */
 .letter-header {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 20px;
-  position: relative;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
 /* Тег в полном просмотре письма */
 .letter-tag {
-  position: absolute;
-  top: 10px;
-  right: 0;
   padding: 6px 16px;
   background: linear-gradient(135deg, rgba(255, 192, 203, 0.3), rgba(255, 182, 193, 0.3));
   border: 1px solid rgba(255, 192, 203, 0.5);
@@ -467,14 +464,7 @@
 
 @media (max-width: 768px) {
   .letter-header {
-    flex-direction: column;
-    align-items: center;
     gap: 10px;
-  }
-
-  .letter-tag {
-    position: static;
-    margin-top: -10px;
   }
 
   .letter-item-content {
