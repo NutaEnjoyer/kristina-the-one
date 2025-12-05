@@ -34,7 +34,10 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
             ← К списку
           </button>
 
-          <h1 className="letter-title">{selectedLetter.title}</h1>
+          <div className="letter-header">
+            <h1 className="letter-title">{selectedLetter.title}</h1>
+            {selectedLetter.tag && <span className="letter-tag">{selectedLetter.tag}</span>}
+          </div>
           {selectedLetter.date && <p className="letter-full-date">{selectedLetter.date}</p>}
 
           <div className="letter-full-text">
@@ -72,7 +75,10 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
               onClick={() => handleLetterOpen(letter)}
             >
               <span className="letter-number">{letter.id}</span>
-              <span className="letter-item-title">{letter.title}</span>
+              <div className="letter-item-content">
+                <span className="letter-item-title">{letter.title}</span>
+                {letter.tag && <span className="letter-tag-small">{letter.tag}</span>}
+              </div>
               {letter.date && <span className="letter-date">{letter.date}</span>}
               <span className="letter-arrow">→</span>
             </button>

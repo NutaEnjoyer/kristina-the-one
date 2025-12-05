@@ -380,85 +380,98 @@ export const letters = [
     id: 0,
     title: 'Введение',
     text: letterTextIntro,
-    date: '26.11'
+    date: '26.11',
+    tag: 'Мысли'
   },
   {
-
     id: 1,
     title: 'Расставание',
     text: letterText,
-    date: '21.11'
+    date: '21.11',
+    tag: 'Мысли'
   },
   {
     id: 2,
     title: 'Ошибки',
     text: letterTextTwo,
-    date: '21.11'
+    date: '21.11',
+    tag: 'Мысли'
   },
   {
     id: 3,
     title: 'О ней',
     text: letterTextThree,
-    date: '22.11'
+    date: '22.11',
+    tag: 'Мысли'
   },
   {
     id: 4,
     title: 'О себе',
     text: letterTextFour,
-    date: '23.11'
+    date: '23.11',
+    tag: 'Мысли'
   },
   {
     id: 5,
     title: 'Психолог',
     text: letterTextSunday,
-    date: '24.11'
-  }, 
+    date: '24.11',
+    tag: 'Итоги'
+  },
   {
     id: 6,
     title: 'Страхи',
     text: letterTextFears,
-    date: '25.11'
-  }, 
+    date: '25.11',
+    tag: 'Философия'
+  },
   {
     id: 7,
     title: 'Деньги',
     text: letterTextMoney,
-    date: '25.11'
+    date: '25.11',
+    tag: 'Философия'
   },
   {
     id: 8,
     title: 'Возвращать или отпустить',
     text: letterTextBack,
-    date: '26.11'
+    date: '26.11',
+    tag: 'Философия'
   },
   {
     id: 9,
     title: 'Первая неделя',
     text: letterTextWeekResults,
-    date: '30.11'
+    date: '30.11',
+    tag: 'Итоги'
   },
   {
     id: 10,
     title: 'Неопределенность',
     text: letterTextWaitingPlan,
-    date: '2.12'
+    date: '2.12',
+    tag: 'Мысли'
   },
   {
-    id: 11, 
+    id: 11,
     title: 'Принципы',
     text: letterTextPrincipls,
-    date: '3.12'
+    date: '3.12',
+    tag: 'Философия'
   },
   {
     id: 12,
     title: 'Начать с нуля',
     text: letterTextStartFromZero,
-    date: '5.12'
+    date: '5.12',
+    tag: 'Философия'
   },
   {
     id: 13,
-    title: 'Настоящий',
+    title: 'Встреча',
     text: letterTextPsycologic3,
-    date: '5.12'
+    date: '5.12',
+    tag: 'Мысли'
   }
 ]
