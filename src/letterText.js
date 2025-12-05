@@ -403,11 +403,11 @@ export const letters = [
     title: 'Принципы',
     text: letterTextPrincipls,
     date: '3.12'
+  },
+  {
+    id: 12,
+    title: 'Начать с нуля',
+    text: letterTextStartFromZero,
+    date: '5.12'
   }
-  // {
-  //   id: 12,
-  //   title: 'Начать с нуля',
-  //   text: letterTextStartFromZero,
-  //   date: '5.12'
-  // }
 ]
