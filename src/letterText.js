@@ -535,6 +535,6 @@ export const letters = [
     title: 'Максимум',
     text: letterTextMaximum,
     date: '6.12',
-    tag: ''
+    tag: 'Философия'
   }
 ]
