@@ -639,7 +639,7 @@ export const letters = [
     id: 15,
     title: 'Вторая неделя',
     text: letterTextSecondWeekResults,
-    date: '7.11',
+    date: '7.12',
     tag: 'Итоги',
     inProgress: false
   },
