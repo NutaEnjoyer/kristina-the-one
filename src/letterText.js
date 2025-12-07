@@ -461,111 +461,135 @@ export const letters = [
     title: 'Введение',
     text: letterTextIntro,
     date: '26.11',
-    tag: 'Мысли'
+    tag: 'Мысли',
+    inProgress: false
   },
   {
     id: 1,
     title: 'Расставание',
     text: letterText,
     date: '21.11',
-    tag: 'Мысли'
+    tag: 'Мысли',
+    inProgress: false
   },
   {
     id: 2,
     title: 'Ошибки',
     text: letterTextTwo,
     date: '21.11',
-    tag: 'Мысли'
+    tag: 'Мысли',
+    inProgress: false
   },
   {
     id: 3,
     title: 'О ней',
     text: letterTextThree,
     date: '22.11',
-    tag: 'Мысли'
+    tag: 'Мысли',
+    inProgress: false
   },
   {
     id: 4,
     title: 'О себе',
     text: letterTextFour,
     date: '23.11',
-    tag: 'Мысли'
+    tag: 'Мысли',
+    inProgress: false
   },
   {
     id: 5,
     title: 'Психолог',
     text: letterTextSunday,
     date: '24.11',
-    tag: 'Итоги'
+    tag: 'Итоги',
+    inProgress: false
   },
   {
     id: 6,
     title: 'Страхи',
     text: letterTextFears,
     date: '25.11',
-    tag: 'Философия'
+    tag: 'Философия',
+    inProgress: false
   },
   {
     id: 7,
     title: 'Деньги',
     text: letterTextMoney,
     date: '25.11',
-    tag: 'Философия'
+    tag: 'Философия',
+    inProgress: false
   },
   {
     id: 8,
     title: 'Возвращать или отпустить',
     text: letterTextBack,
     date: '26.11',
-    tag: 'Философия'
+    tag: 'Философия',
+    inProgress: false
   },
   {
     id: 9,
     title: 'Первая неделя',
     text: letterTextWeekResults,
     date: '30.11',
-    tag: 'Итоги'
+    tag: 'Итоги',
+    inProgress: false
   },
   {
     id: 10,
     title: 'Неопределенность',
     text: letterTextWaitingPlan,
     date: '2.12',
-    tag: 'Мысли'
+    tag: 'Мысли',
+    inProgress: false
   },
   {
     id: 11,
     title: 'Принципы',
     text: letterTextPrincipls,
     date: '3.12',
-    tag: 'Философия'
+    tag: 'Философия',
+    inProgress: false
   },
   {
     id: 12,
     title: 'Начать с нуля',
     text: letterTextStartFromZero,
     date: '5.12',
-    tag: 'Философия'
+    tag: 'Философия',
+    inProgress: false
   },
   {
     id: 13,
     title: 'Встреча',
     text: letterTextPsycologic3,
     date: '5.12',
-    tag: 'Мысли'
+    tag: 'Мысли',
+    inProgress: false
   },
   {
     id: 14,
     title: 'Максимум',
     text: letterTextMaximum,
     date: '6.12',
-    tag: 'Философия'
+    tag: 'Философия',
+    inProgress: false
   },
   {
     id: 15,
     title: 'Вторая неделя',
     text: letterTextSecondWeekResults,
     date: '7.11',
-    tag: 'Итоги'
+    tag: 'Итоги',
+    inProgress: false
+  },
+  {
+    id: 16,
+    title: 'Планы',
+    text: '',
+    date: '7.11',
+    tag: 'Мысли',
+    inProgress: true
   }
 ]

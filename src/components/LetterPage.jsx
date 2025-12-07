@@ -76,7 +76,10 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
             >
               <span className="letter-number">{letter.id}</span>
               <div className="letter-item-content">
-                <span className="letter-item-title">{letter.title}</span>
+                <span className="letter-item-title">
+                  {letter.title}
+                  {letter.inProgress && <span className="writing-status"> • Пишется...</span>}
+                </span>
                 {letter.tag && <span className="letter-tag-small">{letter.tag}</span>}
               </div>
               {letter.date && <span className="letter-date">{letter.date}</span>}
