@@ -650,7 +650,7 @@ export const letters = [
     id: 16,
     title: 'Будущее',
     text: letterTextNewPlans,
-    date: '7.12',
+    date: '8.12',
     tag: 'Планы',
     inProgress: false
   }
