@@ -773,9 +773,9 @@ export const letters = [
   {
     id: 18,
     title: "Завтра?",
-    text: "",
+    text: letterTextDiana,
     date: '9.12',
-    tag: letterTextDiana,
+    tag: "",
     inProgress: false
   }
 ]
