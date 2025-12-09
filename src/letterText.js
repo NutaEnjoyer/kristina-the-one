@@ -745,5 +745,13 @@ export const letters = [
     date: '8.12',
     tag: 'Мысли',
     inProgress: false
+  },
+  {
+    id: 18,
+    title: "Didn't even try",
+    text: "",
+    date: '9.12',
+    tag: "",
+    inProgress: true
   }
 ]
