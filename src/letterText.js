@@ -911,7 +911,7 @@ export const letters = [
   {
     id: 23, 
     title: 'Предел',
-    text: letterTextRemark,
+    text: letterTextCharles,
     date: '11.12',
     tag: 'Метафора',
     inProgress: false
