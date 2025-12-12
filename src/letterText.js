@@ -958,7 +958,7 @@ export const letters = [
   {
     id: 24, 
     title: 'Эго',
-    text: letterTextCharles,
+    text: letterTextEgo,
     date: '12.12',
     tag: '',
     inProgress: false
