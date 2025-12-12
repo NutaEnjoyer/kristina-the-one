@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Interactive emotional letter with scroll animations",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "migrate": "node scripts/migrate-to-db.js"
   },
   "dependencies": {
     "react": "^18.2.0",
