@@ -501,3 +501,141 @@
     font-size: 0.75rem;
   }
 }
+
+/* ===== CRUD КНОПКИ ===== */
+
+/* Заголовок списка с кнопкой создания */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+/* Кнопка создания новой записи */
+.create-letter-btn {
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.2), rgba(255, 192, 203, 0.3));
+  border: 2px solid rgba(255, 105, 180, 0.4);
+  border-radius: 25px;
+  color: #d4669a;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(255, 105, 180, 0.2);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.create-letter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 105, 180, 0.3);
+  background: linear-gradient(135deg, rgba(255, 105, 180, 0.3), rgba(255, 192, 203, 0.4));
+}
+
+/* Контейнер верхних кнопок в просмотре письма */
+.letter-top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 15px;
+}
+
+.letter-action-btns {
+  display: flex;
+  gap: 10px;
+}
+
+/* Кнопка редактирования */
+.edit-btn {
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: rgba(135, 206, 250, 0.2);
+  border: 2px solid rgba(135, 206, 250, 0.5);
+  border-radius: 25px;
+  color: #4a90e2;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(135, 206, 250, 0.3);
+  background: rgba(135, 206, 250, 0.3);
+}
+
+/* Кнопка удаления */
+.delete-btn {
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: rgba(255, 99, 71, 0.2);
+  border: 2px solid rgba(255, 99, 71, 0.5);
+  border-radius: 25px;
+  color: #e74c3c;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 99, 71, 0.3);
+  background: rgba(255, 99, 71, 0.3);
+}
+
+/* Сообщения загрузки и ошибок */
+.loading-message,
+.error-message {
+  text-align: center;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: #d4669a;
+  margin: 20px 0;
+}
+
+.error-message {
+  background: rgba(255, 99, 71, 0.1);
+  border: 1px solid rgba(255, 99, 71, 0.3);
+  border-radius: 10px;
+  color: #e74c3c;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .list-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .create-letter-btn {
+    width: 100%;
+    padding: 14px 20px;
+  }
+
+  .letter-top-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .letter-action-btns {
+    width: 100%;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    flex: 1;
+    padding: 12px 18px;
+    font-size: 0.9rem;
+  }
+}
