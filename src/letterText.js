@@ -1125,7 +1125,7 @@ export const letters = [
   {
     id: 27,
     title: 'Жертва',
-    text: letterTextNPC,
+    text: letterTextMenance,
     date: '14.12',
     tag: '',
     inProgress: false
