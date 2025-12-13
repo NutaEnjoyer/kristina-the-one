@@ -1040,6 +1040,6 @@ export const letters = [
     text: letterTextNPC,
     date: '13.12',
     tag: '',
-    inProgress: true
+    inProgress: false
   }
 ]
