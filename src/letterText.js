@@ -1121,5 +1121,13 @@ export const letters = [
     date: '13.12',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 27,
+    title: 'Жертва',
+    text: letterTextNPC,
+    date: '14.12',
+    tag: '',
+    inProgress: false
   }
 ]
