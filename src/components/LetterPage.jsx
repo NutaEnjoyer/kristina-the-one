@@ -2,24 +2,27 @@ import { useState, useRef, useEffect } from 'react'
 import './LetterPage.css'
 import { letters as fallbackLetters } from '../letterText'
 import { logLetterOpen, logButtonClick } from '../utils/logger'
-import { lettersApi } from '../api/lettersApi'
-import { LetterForm } from './LetterForm'
+// import { lettersApi } from '../api/lettersApi' // Для будущего использования с API
+// import { LetterForm } from './LetterForm' // Для будущего использования с API
 
 // Полноэкранная страница письма
 export function LetterPageFull({ onClose, onShowFlowers }) {
   const [selectedLetter, setSelectedLetter] = useState(null)
   const [letters, setLetters] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [showForm, setShowForm] = useState(false)
-  const [editingLetter, setEditingLetter] = useState(null)
+  // const [error, setError] = useState(null) // Не используется при локальной загрузке
+  // const [showForm, setShowForm] = useState(false) // Для будущего CRUD
+  // const [editingLetter, setEditingLetter] = useState(null) // Для будущего CRUD
   const containerRef = useRef(null)
 
-  // Загрузка писем из API
+  // Загрузка писем из локального файла (пока без API)
   useEffect(() => {
-    loadLetters()
+    setLetters(fallbackLetters)
+    setLoading(false)
   }, [])
 
+  // Закомментировано - для будущего использования с API
+  /*
   const loadLetters = async () => {
     try {
       setLoading(true)
@@ -35,7 +38,10 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
       setLoading(false)
     }
   }
+  */
 
+  // CRUD функции закомментированы - используем только локальные данные
+  /*
   const handleCreateLetter = () => {
     setEditingLetter(null)
     setShowForm(true)
@@ -78,6 +84,7 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
       alert('Не удалось сохранить запись')
     }
   }
+  */
 
   // Обработчик открытия письма с логированием
   const handleLetterOpen = (letter) => {
@@ -101,19 +108,9 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
     return (
       <div className="letter-page-full" ref={containerRef}>
         <div className="letter-full-container">
-          <div className="letter-top-controls">
-            <button className="back-btn" onClick={() => setSelectedLetter(null)}>
-              ← К списку
-            </button>
-            <div className="letter-action-btns">
-              <button className="edit-btn" onClick={() => handleEditLetter(selectedLetter)}>
-                ✎ Редактировать
-              </button>
-              <button className="delete-btn" onClick={() => handleDeleteLetter(selectedLetter.id)}>
-                ✕ Удалить
-              </button>
-            </div>
-          </div>
+          <button className="back-btn" onClick={() => setSelectedLetter(null)}>
+            ← К списку
+          </button>
 
           <div className="letter-header">
             <h1 className="letter-title">{selectedLetter.title}</h1>
@@ -143,21 +140,10 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
 
   // Иначе показываем список писем
   return (
-    <>
-      <div className="letter-page-full">
-        <div className="letter-full-container">
-          <div className="list-header">
-            <div>
-              <h1 className="letter-title">Дневник</h1>
-              <p className="letter-subtitle">Просто мои мысли без нейронок и прочего. Оставлю их здесь.</p>
-            </div>
-            <button className="create-letter-btn" onClick={handleCreateLetter}>
-              + Новая запись
-            </button>
-          </div>
-
-          {loading && <p className="loading-message">Загрузка...</p>}
-          {error && <p className="error-message">{error}</p>}
+    <div className="letter-page-full">
+      <div className="letter-full-container">
+        <h1 className="letter-title">Дневник</h1>
+        <p className="letter-subtitle">Просто мои мысли без нейронок и прочего. Оставлю их здесь.</p>
 
           <div className="letters-list">
             {letters.map(letter => (
@@ -180,29 +166,17 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
             ))}
           </div>
 
-          <button className="flowers-btn" onClick={() => {
-            logButtonClick('Выбрать цветы', {
-              source: 'letter-page',
-              lettersViewed: letters.length
-            })
-            onShowFlowers()
-          }}>
-            Выбрать цветы 🌸
-          </button>
-        </div>
+        <button className="flowers-btn" onClick={() => {
+          logButtonClick('Выбрать цветы', {
+            source: 'letter-page',
+            lettersViewed: letters.length
+          })
+          onShowFlowers()
+        }}>
+          Выбрать цветы 🌸
+        </button>
       </div>
-
-      {showForm && (
-        <LetterForm
-          letter={editingLetter}
-          onSave={handleSaveLetter}
-          onCancel={() => {
-            setShowForm(false)
-            setEditingLetter(null)
-          }}
-        />
-      )}
-    </>
+    </div>
   )
 }
 
