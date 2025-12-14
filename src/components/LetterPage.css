@@ -504,6 +504,38 @@
 
 /* ===== CRUD КНОПКИ ===== */
 
+/* Заголовок дневника с кнопкой сортировки */
+.diary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+/* Кнопка реверса списка */
+.reverse-btn {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  background: rgba(255, 192, 203, 0.2);
+  border: 2px solid rgba(255, 192, 203, 0.5);
+  border-radius: 25px;
+  color: #d4669a;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(255, 192, 203, 0.2);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.reverse-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 192, 203, 0.3);
+  background: rgba(255, 192, 203, 0.3);
+}
+
 /* Заголовок списка с кнопкой создания */
 .list-header {
   display: flex;
@@ -612,6 +644,18 @@
 
 /* Мобильная адаптация */
 @media (max-width: 768px) {
+  .diary-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .reverse-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+
   .list-header {
     flex-direction: column;
     align-items: stretch;
