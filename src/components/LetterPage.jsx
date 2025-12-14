@@ -10,6 +10,7 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
   const [selectedLetter, setSelectedLetter] = useState(null)
   const [letters, setLetters] = useState([])
   const [loading, setLoading] = useState(true)
+  const [reversed, setReversed] = useState(false) // Флаг реверса
   // const [error, setError] = useState(null) // Не используется при локальной загрузке
   // const [showForm, setShowForm] = useState(false) // Для будущего CRUD
   // const [editingLetter, setEditingLetter] = useState(null) // Для будущего CRUD
@@ -20,6 +21,12 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
     setLetters(fallbackLetters)
     setLoading(false)
   }, [])
+
+  // Функция переворота списка
+  const toggleReverse = () => {
+    setLetters([...letters].reverse())
+    setReversed(!reversed)
+  }
 
   // Закомментировано - для будущего использования с API
   /*
@@ -142,8 +149,15 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
   return (
     <div className="letter-page-full">
       <div className="letter-full-container">
-        <h1 className="letter-title">Дневник</h1>
-        <p className="letter-subtitle">Просто мои мысли без нейронок и прочего. Оставлю их здесь.</p>
+        <div className="diary-header">
+          <div>
+            <h1 className="letter-title">Дневник</h1>
+            <p className="letter-subtitle">Просто мои мысли без нейронок и прочего. Оставлю их здесь.</p>
+          </div>
+          <button className="reverse-btn" onClick={toggleReverse}>
+            {reversed ? '↓ Новые сверху' : '↑ Старые сверху'}
+          </button>
+        </div>
 
           <div className="letters-list">
             {letters.map(letter => (
