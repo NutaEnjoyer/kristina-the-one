@@ -10,8 +10,8 @@
 }
 
 .snowflake {
-  position: absolute;
-  top: -20px;
+  position: fixed;
+  top: -100px;
   color: #a8d8ff;
   text-shadow:
     0 0 5px rgba(168, 216, 255, 0.8),
@@ -21,5 +21,25 @@
   pointer-events: none;
   font-weight: normal;
   filter: drop-shadow(0 0 3px rgba(168, 216, 255, 0.6));
-  will-change: transform;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: var(--opacity, 0.5);
+  }
+
+  75% {
+    opacity: var(--opacity, 0.5);
+  }
+
+  100% {
+    transform: translateY(calc(100vh + 100px)) translateX(var(--drift, 0)) rotate(360deg);
+    opacity: 0;
+  }
 }
