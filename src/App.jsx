@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import FloatingParticles from './components/FloatingParticles'
+import Snowflakes from './components/Snowflakes'
+import ChristmasLights from './components/ChristmasLights'
 import FinalScene from './components/FinalScene'
 import { LetterPageFull } from './components/LetterPage'
 import {
@@ -138,7 +140,8 @@ function App() {
     return (
       <div className="app">
         <div className="background-gradient" />
-        <FloatingParticles />
+        <ChristmasLights />
+        <Snowflakes />
         <FinalScene onBack={() => {
           setShowFlowers(false)
         }} />
@@ -148,11 +151,15 @@ function App() {
 
   // По умолчанию всегда показываем страницу с письмами
   return (
-    <LetterPageFull
-      onShowFlowers={() => {
-        setShowFlowers(true)
-      }}
-    />
+    <>
+      <ChristmasLights />
+      <Snowflakes />
+      <LetterPageFull
+        onShowFlowers={() => {
+          setShowFlowers(true)
+        }}
+      />
+    </>
   )
 }
 

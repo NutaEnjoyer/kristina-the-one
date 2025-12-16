@@ -11,7 +11,7 @@ html {
 body {
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
-  background: #fef5f1;
+  background: #e8f4f8;
   color: #333;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -28,14 +28,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 192, 203, 0.1);
+  background: rgba(110, 181, 255, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 192, 203, 0.5);
+  background: rgba(110, 181, 255, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 192, 203, 0.7);
+  background: rgba(110, 181, 255, 0.7);
 }
