@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      background: #e8f4f8;
+      height: 100vh;
+    }
+    .snowflake {
+      position: fixed;
+      color: white;
+      font-size: 30px;
+      text-shadow: 0 0 10px white;
+      animation: fall 5s linear infinite;
+    }
+    @keyframes fall {
+      0% { top: -50px; }
+      100% { top: 100vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="snowflake" style="left: 10%;">❄</div>
+  <div class="snowflake" style="left: 30%; animation-delay: 1s;">❅</div>
+  <div class="snowflake" style="left: 50%; animation-delay: 2s;">❆</div>
+  <div class="snowflake" style="left: 70%; animation-delay: 3s;">❄</div>
+  <div class="snowflake" style="left: 90%; animation-delay: 4s;">❅</div>
+  <h1 style="text-align: center; padding-top: 50px;">Test Snowflakes</h1>
+</body>
+</html>
