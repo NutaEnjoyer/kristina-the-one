@@ -44,16 +44,19 @@ function Snowflake({ index }) {
       transition={{
         duration: randomDuration,
         repeat: Infinity,
+        repeatType: "loop",
         delay: randomDelay,
         ease: "linear",
         x: {
           duration: randomDuration / 2,
           repeat: Infinity,
+          repeatType: "loop",
           ease: "easeInOut"
         },
         rotate: {
           duration: randomDuration,
           repeat: Infinity,
+          repeatType: "loop",
           ease: "linear"
         }
       }}
