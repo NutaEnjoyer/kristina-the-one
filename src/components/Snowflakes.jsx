@@ -1,68 +1,43 @@
-import { motion } from 'framer-motion'
 import './Snowflakes.css'
 
 // Компонент создаёт падающие снежинки
 function Snowflakes() {
-  const snowflakesCount = 20
-  const snowflakes = Array.from({ length: snowflakesCount })
+  // Создаем массив снежинок один раз при рендере
+  const snowflakes = Array.from({ length: 50 }, (_, i) => {
+    const randomX = Math.random() * 100
+    const randomDuration = 8 + Math.random() * 7 // 8-15 секунд
+    const randomDelay = -(Math.random() * 15) // отрицательная задержка для старта с разных позиций
+    const randomSize = 12 + Math.random() * 16
+    const randomOpacity = 0.3 + Math.random() * 0.3
+    const symbol = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)]
+    const randomDrift = (Math.random() - 0.5) * 100
+
+    return {
+      id: i,
+      style: {
+        left: `${randomX}%`,
+        fontSize: `${randomSize}px`,
+        animationDuration: `${randomDuration}s`,
+        animationDelay: `${randomDelay}s`,
+        '--drift': `${randomDrift}px`,
+        '--opacity': randomOpacity
+      },
+      symbol
+    }
+  })
 
   return (
     <div className="snowflakes-container">
-      {snowflakes.map((_, i) => (
-        <Snowflake key={i} index={i} />
+      {snowflakes.map((flake) => (
+        <div
+          key={flake.id}
+          className="snowflake"
+          style={flake.style}
+        >
+          {flake.symbol}
+        </div>
       ))}
     </div>
-  )
-}
-
-function Snowflake({ index }) {
-  // Рандомные параметры для каждой снежинки
-  const randomX = Math.random() * 100
-  const randomDelay = Math.random() * 5
-  const randomDuration = 5 + Math.random() * 10
-  const randomSize = 12 + Math.random() * 16
-  const randomOpacity = 0.3 + Math.random() * 0.3
-
-  // Случайный символ снежинки
-  const snowflakeSymbols = ['❄', '❅', '❆']
-  const symbol = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)]
-
-  return (
-    <motion.div
-      className="snowflake"
-      style={{
-        left: `${randomX}%`,
-        fontSize: `${randomSize}px`,
-        opacity: randomOpacity,
-      }}
-      initial={{ y: -20, x: 0 }}
-      animate={{
-        y: typeof window !== 'undefined' ? window.innerHeight + 20 : 1000,
-        x: [0, Math.random() * 100 - 50, Math.random() * 100 - 50, 0],
-        rotate: [0, 360],
-      }}
-      transition={{
-        duration: randomDuration,
-        repeat: Infinity,
-        repeatType: "loop",
-        delay: randomDelay,
-        ease: "linear",
-        x: {
-          duration: randomDuration / 2,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "easeInOut"
-        },
-        rotate: {
-          duration: randomDuration,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "linear"
-        }
-      }}
-    >
-      {symbol}
-    </motion.div>
   )
 }
 
