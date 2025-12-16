@@ -3,7 +3,7 @@ import './Snowflakes.css'
 // Компонент создаёт падающие снежинки
 function Snowflakes() {
   // Создаем массив снежинок один раз при рендере
-  const snowflakes = Array.from({ length: 50 }, (_, i) => {
+  const snowflakes = Array.from({ length: 15 }, (_, i) => {
     const randomX = Math.random() * 100
     const randomDuration = 8 + Math.random() * 7 // 8-15 секунд
     const randomDelay = -(Math.random() * 15) // отрицательная задержка для старта с разных позиций
