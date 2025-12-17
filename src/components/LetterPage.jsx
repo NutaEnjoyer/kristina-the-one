@@ -26,6 +26,12 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
   const toggleReverse = () => {
     setLetters([...letters].reverse())
     setReversed(!reversed)
+
+    // Логируем переключение сортировки
+    logButtonClick(reversed ? 'Новые сверху' : 'Старые сверху', {
+      source: 'diary-sort',
+      totalLetters: letters.length
+    })
   }
 
   // Закомментировано - для будущего использования с API
