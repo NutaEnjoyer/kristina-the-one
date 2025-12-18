@@ -2093,7 +2093,7 @@ export const letters = [
   },
   {
     id: 36,
-    title: 'Результат один',
+    title: '?',
     text: letterTextWhy,
     date: '18.12',
     tag: '',
