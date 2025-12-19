@@ -2224,7 +2224,7 @@ export const letters = [
   {
     id: 37,
     title: 'Комфорт',
-    text: letterTextWhy,
+    text: letterTextComfortToGodMode,
     date: '19.12',
     tag: '',
     inProgress: false
