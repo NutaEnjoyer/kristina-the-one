@@ -2263,7 +2263,7 @@ export const letters = [
   },
   {
     id: 38,
-    title: '',
+    title: '19 декабря',
     text: letterTextPaymentOpen,
     date: '19.12',
     tag: '',
