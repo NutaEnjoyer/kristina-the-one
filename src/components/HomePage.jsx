@@ -34,7 +34,7 @@ export function HomePage({ onNavigate }) {
       <div className="home-container">
         <header className="home-header">
           <h1 className="home-title">Макс</h1>
-          <p className="home-subtitle">Разработчик. Предприниматель. Человек.</p>
+          <p className="home-subtitle">Chaque jour est une création</p>
         </header>
 
         <nav className="home-menu">

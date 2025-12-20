@@ -15,7 +15,8 @@ import {
   logVisibilityChange,
   resetInactivityTimer,
   logWindowResize,
-  logError
+  logError,
+  logPageNavigation
 } from './utils/logger'
 
 
@@ -157,11 +158,27 @@ function App() {
 
   // Навигация между страницами
   const handleNavigate = (page) => {
+    const previousPage = currentPage
     setCurrentPage(page)
+
+    // Логируем переход на новую страницу
+    try {
+      logPageNavigation(page, previousPage)
+    } catch (error) {
+      // Тихо игнорируем ошибки логирования
+    }
   }
 
   const handleBackToHome = () => {
+    const previousPage = currentPage
     setCurrentPage('home')
+
+    // Логируем возврат на главную
+    try {
+      logPageNavigation('home', previousPage)
+    } catch (error) {
+      // Тихо игнорируем ошибки логирования
+    }
   }
 
   // Рендерим страницу в зависимости от текущего состояния

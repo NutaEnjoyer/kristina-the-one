@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import './MusicPage.css'
+import { logTrackPlay } from '../utils/logger'
 
 export function MusicPage({ onBack }) {
   const [currentTrack, setCurrentTrack] = useState(null)
@@ -81,6 +82,13 @@ export function MusicPage({ onBack }) {
 
   const handleTrackClick = (track) => {
     setCurrentTrack(track)
+
+    // Логируем включение трека
+    try {
+      logTrackPlay(track.track, track.artist)
+    } catch (error) {
+      // Тихо игнорируем ошибки логирования
+    }
   }
 
   const handlePlayPause = () => {
@@ -97,13 +105,29 @@ export function MusicPage({ onBack }) {
   const handleNext = () => {
     const currentIndex = musicList.findIndex(t => t.id === currentTrack?.id)
     const nextIndex = (currentIndex + 1) % musicList.length
-    setCurrentTrack(musicList[nextIndex])
+    const nextTrack = musicList[nextIndex]
+    setCurrentTrack(nextTrack)
+
+    // Логируем включение следующего трека
+    try {
+      logTrackPlay(nextTrack.track, nextTrack.artist)
+    } catch (error) {
+      // Тихо игнорируем ошибки логирования
+    }
   }
 
   const handlePrev = () => {
     const currentIndex = musicList.findIndex(t => t.id === currentTrack?.id)
     const prevIndex = currentIndex === 0 ? musicList.length - 1 : currentIndex - 1
-    setCurrentTrack(musicList[prevIndex])
+    const prevTrack = musicList[prevIndex]
+    setCurrentTrack(prevTrack)
+
+    // Логируем включение предыдущего трека
+    try {
+      logTrackPlay(prevTrack.track, prevTrack.artist)
+    } catch (error) {
+      // Тихо игнорируем ошибки логирования
+    }
   }
 
   const handleSeek = (e) => {
@@ -146,7 +170,11 @@ export function MusicPage({ onBack }) {
                 <span className="music-artist">{item.artist}</span>
               </div>
               <span className="music-icon">
-                {currentTrack?.id === item.id ? '⏸' : '▶'}
+                <img
+                  src={currentTrack?.id === item.id ? '/icons/pause-1006-svgrepo-com.svg' : '/icons/play-1003-svgrepo-com.svg'}
+                  alt={currentTrack?.id === item.id ? 'Pause' : 'Play'}
+                  className="music-icon-img"
+                />
               </span>
             </div>
           ))}
@@ -163,21 +191,25 @@ export function MusicPage({ onBack }) {
 
           <div className="fixed-player-content">
             <div className="player-track-info">
-              <span className="player-artist-name">{currentTrack.artist}</span>
               <span className="player-track-name">{currentTrack.track}</span>
+              <span className="player-artist-name">{currentTrack.artist}</span>
             </div>
 
             <div className="player-controls">
               <button className="control-btn prev" onClick={handlePrev}>
-                ⏮
+                <img src="/icons/arrow-left-335-svgrepo-com.svg" alt="Previous" className="control-icon" />
               </button>
 
               <button className="control-btn play-pause" onClick={handlePlayPause}>
-                {isPlaying ? '⏸' : '▶'}
+                <img
+                  src={isPlaying ? '/icons/pause-1006-svgrepo-com.svg' : '/icons/play-1003-svgrepo-com.svg'}
+                  alt={isPlaying ? 'Pause' : 'Play'}
+                  className="control-icon play-icon"
+                />
               </button>
 
               <button className="control-btn next" onClick={handleNext}>
-                ⏭
+                <img src="/icons/arrow-right-336-svgrepo-com.svg" alt="Next" className="control-icon" />
               </button>
             </div>
 

@@ -29,7 +29,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding-top: 100px;
-  padding-bottom: 150px;
+  padding-bottom: 200px;
 }
 
 .back-btn {
@@ -111,15 +111,15 @@
 }
 
 .player-track-name {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #333;
 }
 
 .player-artist-name {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #4a90e2;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .player-controls {
@@ -132,8 +132,6 @@
 .control-btn {
   background: rgba(110, 181, 255, 0.1);
   border: 2px solid rgba(110, 181, 255, 0.3);
-  font-size: 1.5rem;
-  color: #4a90e2;
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 50%;
@@ -144,15 +142,28 @@
   justify-content: center;
 }
 
+.control-icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(75%) saturate(1500%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  transition: all 0.3s ease;
+}
+
+.play-icon {
+  width: 28px;
+  height: 28px;
+}
+
 .control-btn.play-pause {
   width: 60px;
   height: 60px;
-  font-size: 1.8rem;
   background: linear-gradient(135deg, #4a90e2 0%, #6eb5ff 100%) !important;
-  color: white !important;
   border: none;
   box-shadow: 0 4px 15px rgba(110, 181, 255, 0.4);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn.play-pause .control-icon {
+  filter: brightness(0) invert(1);
 }
 
 .control-btn.play-pause:hover {
@@ -233,7 +244,7 @@
   backdrop-filter: blur(10px);
   border: 2px solid rgba(110, 181, 255, 0.3);
   border-radius: 15px;
-  padding: 20px 25px;
+  padding: 15px 25px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(110, 181, 255, 0.1);
@@ -275,6 +286,16 @@
   color: #4a90e2;
   opacity: 0.5;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-icon-img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(75%) saturate(1500%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  transition: all 0.3s ease;
 }
 
 .music-item:hover .music-icon {
@@ -311,13 +332,11 @@
   }
 
   .music-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    padding: 12px 20px;
   }
 
-  .music-icon {
-    align-self: flex-end;
+  .music-track {
+    font-size: 1rem;
   }
 
   .fixed-player {
