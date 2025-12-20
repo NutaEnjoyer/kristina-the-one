@@ -473,6 +473,64 @@ export function logLetterOpen(letterId, letterTitle) {
   }
 }
 
+// Логирование навигации по страницам
+export function logPageNavigation(pageName, previousPage = null) {
+  try {
+    const pageEmojis = {
+      'home': '🏠',
+      'diary': '📖',
+      'schedule': '📅',
+      'music': '🎵',
+      'uni': '🎯'
+    }
+
+    const pageNames = {
+      'home': 'Главная',
+      'diary': 'Дневник',
+      'schedule': 'Распорядок',
+      'music': 'Музыка',
+      'uni': 'UNI'
+    }
+
+    const emoji = pageEmojis[pageName] || '📄'
+    const displayName = pageNames[pageName] || pageName
+
+    let message = `${emoji} ПЕРЕХОД НА СТРАНИЦУ\n\n` +
+      `📄 Страница: <b>${displayName}</b>\n` +
+      `⏰ Время: ${new Date().toLocaleString('ru-RU')}\n` +
+      `⌛ Время на сайте: ${getSessionDuration()}`
+
+    if (previousPage && previousPage !== pageName) {
+      const prevDisplayName = pageNames[previousPage] || previousPage
+      message += `\n📍 Откуда: ${prevDisplayName}`
+    }
+
+    sendToTelegram(message)
+  } catch (error) {
+    // Тихо игнорируем ошибки
+  }
+}
+
+// Логирование воспроизведения трека
+export function logTrackPlay(trackName, artistName) {
+  try {
+    // Подсчитываем треки
+    const trackCount = parseInt(sessionStorage.getItem('tracks-played') || '0') + 1
+    sessionStorage.setItem('tracks-played', trackCount.toString())
+
+    const message = `🎵 ВКЛЮЧЕН ТРЕК\n\n` +
+      `🎶 Трек: <b>${trackName}</b>\n` +
+      `🎤 Исполнитель: ${artistName}\n` +
+      `⏰ Время: ${new Date().toLocaleString('ru-RU')}\n` +
+      `⌛ Время на сайте: ${getSessionDuration()}\n` +
+      `🔢 Треков включено в сессии: ${trackCount}`
+
+    sendToTelegram(message)
+  } catch (error) {
+    // Тихо игнорируем ошибки
+  }
+}
+
 // Экспорт для общего использования
 export default {
   logVisit,
@@ -485,5 +543,7 @@ export default {
   logPageFocus,
   logWindowResize,
   logError,
-  logLetterOpen
+  logLetterOpen,
+  logPageNavigation,
+  logTrackPlay
 }
