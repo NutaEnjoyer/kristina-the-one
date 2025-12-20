@@ -6,7 +6,7 @@ import { logLetterOpen, logButtonClick } from '../utils/logger'
 // import { LetterForm } from './LetterForm' // Для будущего использования с API
 
 // Полноэкранная страница письма
-export function LetterPageFull({ onClose, onShowFlowers }) {
+export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
   const [selectedLetter, setSelectedLetter] = useState(null)
   const [letters, setLetters] = useState([])
   const [loading, setLoading] = useState(true)
@@ -155,6 +155,12 @@ export function LetterPageFull({ onClose, onShowFlowers }) {
   return (
     <div className="letter-page-full">
       <div className="letter-full-container">
+        {onBack && (
+          <button className="back-btn" onClick={onBack}>
+            ← Назад
+          </button>
+        )}
+
         <div className="diary-header">
           <div>
             <h1 className="letter-title">Дневник</h1>
