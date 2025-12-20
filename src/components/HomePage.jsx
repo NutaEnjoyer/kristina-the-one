@@ -55,7 +55,8 @@ export function HomePage({ onNavigate }) {
         </header>
 
         <button className="quote-btn" onClick={() => setShowQuote(true)}>
-          💭 Цитата дня
+          <img src="/icons/quotes-111-svgrepo-com.svg" alt="Quote" className="quote-icon" />
+          Цитата дня
         </button>
 
         <nav className="home-menu">
