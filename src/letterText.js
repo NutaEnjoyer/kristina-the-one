@@ -2556,7 +2556,7 @@ export const letters = [
   {
     id: 40,
     title: 'Free write',
-    text: letterTextWhatIsRight,
+    text: letterTextFreeWrite1,
     date: '20.12',
     tag: '',
     inProgress: false
