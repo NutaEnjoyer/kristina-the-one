@@ -5,6 +5,10 @@ import Snowflakes from './components/Snowflakes'
 import ChristmasLights from './components/ChristmasLights'
 import FinalScene from './components/FinalScene'
 import { LetterPageFull } from './components/LetterPage'
+import { HomePage } from './components/HomePage'
+import { SchedulePage } from './components/SchedulePage'
+import { UNIPage } from './components/UNIPage'
+import { MusicPage } from './components/MusicPage'
 import {
   logVisit,
   logExit,
@@ -17,6 +21,7 @@ import {
 
 function App() {
   const [showFlowers, setShowFlowers] = useState(false) // Новое состояние для страницы цветов
+  const [currentPage, setCurrentPage] = useState('home') // 'home', 'diary', 'progress', 'uni'
 
   // Логирование посещения сайта
   useEffect(() => {
@@ -144,21 +149,54 @@ function App() {
         <Snowflakes />
         <FinalScene onBack={() => {
           setShowFlowers(false)
+          setCurrentPage('home')
         }} />
       </div>
     )
   }
 
-  // По умолчанию всегда показываем страницу с письмами
+  // Навигация между страницами
+  const handleNavigate = (page) => {
+    setCurrentPage(page)
+  }
+
+  const handleBackToHome = () => {
+    setCurrentPage('home')
+  }
+
+  // Рендерим страницу в зависимости от текущего состояния
+  let pageContent
+  switch (currentPage) {
+    case 'diary':
+      pageContent = (
+        <LetterPageFull
+          onShowFlowers={() => {
+            setShowFlowers(true)
+          }}
+          onBack={handleBackToHome}
+        />
+      )
+      break
+    case 'schedule':
+      pageContent = <SchedulePage onBack={handleBackToHome} />
+      break
+    case 'music':
+      pageContent = <MusicPage onBack={handleBackToHome} />
+      break
+    case 'uni':
+      pageContent = <UNIPage onBack={handleBackToHome} />
+      break
+    case 'home':
+    default:
+      pageContent = <HomePage onNavigate={handleNavigate} />
+      break
+  }
+
   return (
     <>
       <ChristmasLights />
       <Snowflakes />
-      <LetterPageFull
-        onShowFlowers={() => {
-          setShowFlowers(true)
-        }}
-      />
+      {pageContent}
     </>
   )
 }
