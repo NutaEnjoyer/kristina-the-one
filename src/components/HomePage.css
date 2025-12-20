@@ -122,6 +122,17 @@
   font-size: 1.1rem;
   color: #4a90e2;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quote-icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(75%) saturate(1500%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  transition: all 0.3s ease;
 }
 
 .quote-btn:hover {
