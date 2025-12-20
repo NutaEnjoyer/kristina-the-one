@@ -2,6 +2,23 @@ import { useState } from 'react'
 import './HomePage.css'
 
 export function HomePage({ onNavigate }) {
+  const [showQuote, setShowQuote] = useState(false)
+
+  const quotes = [
+    {
+      text: "Если не ты, то кто-то другой. Почему не ты? Ты в триллион раз лучше.",
+      author: ""
+    }
+  ]
+
+  // Получаем цитату дня на основе даты
+  const getTodayQuote = () => {
+    const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000)
+    return quotes[dayOfYear % quotes.length]
+  }
+
+  const todayQuote = getTodayQuote()
+
   const menuItems = [
     {
       id: 'diary',
@@ -37,6 +54,10 @@ export function HomePage({ onNavigate }) {
           <p className="home-subtitle">Chaque jour est une création</p>
         </header>
 
+        <button className="quote-btn" onClick={() => setShowQuote(true)}>
+          💭 Цитата дня
+        </button>
+
         <nav className="home-menu">
           {menuItems.map(item => (
             <button
@@ -54,6 +75,21 @@ export function HomePage({ onNavigate }) {
           <p>Обновлено: {new Date().toLocaleDateString('ru-RU')}</p>
         </footer>
       </div>
+
+      {showQuote && (
+        <div className="modal-overlay" onClick={() => setShowQuote(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowQuote(false)}>
+              ✕
+            </button>
+            <h2 className="modal-title">Цитата дня</h2>
+            <blockquote className="quote-text">
+              "{todayQuote.text}"
+            </blockquote>
+            <p className="quote-author">— {todayQuote.author}</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
