@@ -36,18 +36,24 @@ export function MusicPage({ onBack }) {
     },
     {
       id: 5,
+      artist: 'Riton x Nightcrawlers',
+      track: 'It Is Friday Then',
+      file: 'music/It is friday then.mp3'
+    },
+    {
+      id: 6,
       artist: 'PAWSA, Adventures Of Stevie V',
       track: 'Dirty Cash (Money Talks)',
       file: '/music/PAWSA, Adventures Of Stevie V - Dirty Cash (Money Talks).mp3'
     },
     {
-      id: 6,
+      id: 7,
       artist: 'ABBA',
       track: 'The Winner Takes It All',
       file: '/music/The Winner Takes It All - ABBA.mp3'
     },
     {
-      id: 7,
+      id: 8,
       artist: 'Live Piano',
       track: 'Took Her To The O (Medley)',
       file: '/music/Took Her To The O (Live Piano Medley).mp3'
