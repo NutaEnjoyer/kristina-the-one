@@ -428,17 +428,7 @@ export function logPageFocus(hasFocus) {
 
 // Логирование изменения размера окна
 export function logWindowResize(width, height, orientation) {
-  try {
-    const message = `📐 ИЗМЕНЕНИЕ РАЗМЕРА ОКНА\n\n` +
-      `📏 Новый размер: ${width}x${height}\n` +
-      `🔄 Ориентация: ${orientation}\n` +
-      `⏰ ${new Date().toLocaleString('ru-RU')}\n` +
-      `⌛ Время на сайте: ${getSessionDuration()}`
-
-    sendToTelegram(message)
-  } catch (error) {
-    // Тихо игнорируем ошибки
-  }
+  
 }
 
 // Логирование ошибок JavaScript (если они происходят)
