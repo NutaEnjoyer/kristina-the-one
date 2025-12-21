@@ -2688,5 +2688,13 @@ export const letters = [
     date: '21.12',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 42,
+    title: 'Микс',
+    text: letterTextMixCup,
+    date: '21.12',
+    tag: '',
+    inProgress: false
   }
 ]
