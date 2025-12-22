@@ -16,6 +16,12 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
   // const [editingLetter, setEditingLetter] = useState(null) // Для будущего CRUD
   const containerRef = useRef(null)
 
+  // Состояния для механики пароля
+  const [showPasswordModal, setShowPasswordModal] = useState(false)
+  const [pendingLetter, setPendingLetter] = useState(null)
+  const [passwordInput, setPasswordInput] = useState('')
+  const [passwordError, setPasswordError] = useState(false)
+
   // Загрузка писем из локального файла (пока без API)
   useEffect(() => {
     setLetters(fallbackLetters)
@@ -101,8 +107,63 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
 
   // Обработчик открытия письма с логированием
   const handleLetterOpen = (letter) => {
-    setSelectedLetter(letter)
-    logLetterOpen(letter.id, letter.title)
+    // Если у письма есть пароль, показываем модальное окно
+    if (letter.password) {
+      setPendingLetter(letter)
+      setShowPasswordModal(true)
+      setPasswordInput('')
+      setPasswordError(false)
+
+      // Логируем попытку открыть защищенную запись
+      logButtonClick('Попытка открыть защищенную запись', {
+        source: 'diary-password',
+        letterId: letter.id,
+        letterTitle: letter.title
+      })
+    } else {
+      setSelectedLetter(letter)
+      logLetterOpen(letter.id, letter.title)
+    }
+  }
+
+  // Проверка пароля
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault()
+    if (passwordInput === pendingLetter.password) {
+      // Успешный вход
+      logButtonClick('Успешный ввод пароля', {
+        source: 'diary-password',
+        letterId: pendingLetter.id,
+        letterTitle: pendingLetter.title,
+        status: 'success'
+      })
+
+      setSelectedLetter(pendingLetter)
+      logLetterOpen(pendingLetter.id, pendingLetter.title)
+      setShowPasswordModal(false)
+      setPendingLetter(null)
+      setPasswordInput('')
+      setPasswordError(false)
+    } else {
+      // Неудачная попытка
+      logButtonClick('Неверный пароль', {
+        source: 'diary-password',
+        letterId: pendingLetter.id,
+        letterTitle: pendingLetter.title,
+        status: 'failed',
+        attemptedPassword: passwordInput.replace(/./g, '*') // Маскируем пароль звездочками
+      })
+
+      setPasswordError(true)
+    }
+  }
+
+  // Закрытие модального окна пароля
+  const handlePasswordModalClose = () => {
+    setShowPasswordModal(false)
+    setPendingLetter(null)
+    setPasswordInput('')
+    setPasswordError(false)
   }
 
   // Скроллим в начало при смене письма
@@ -182,6 +243,13 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
                 <div className="letter-item-content">
                   <span className="letter-item-title">
                     {letter.title}
+                    {letter.password && (
+                      <img
+                        src="/icons/lock-svgrepo-com.svg"
+                        alt="Защищено"
+                        className="lock-icon"
+                      />
+                    )}
                     {letter.inProgress && <span className="writing-status"> • Пишется...</span>}
                   </span>
                   {letter.tag && <span className="letter-tag-small">{letter.tag}</span>}
@@ -202,6 +270,40 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
           Выбрать цветы 🌸
         </button>
       </div>
+
+      {/* Модальное окно для ввода пароля */}
+      {showPasswordModal && (
+        <div className="password-modal-overlay" onClick={handlePasswordModalClose}>
+          <div className="password-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="password-modal-close" onClick={handlePasswordModalClose}>
+              ✕
+            </button>
+            <h2 className="password-modal-title">Защищенная запись</h2>
+            <p className="password-modal-hint">
+              {pendingLetter?.passwordHint || 'Введите пароль для доступа к записи'}
+            </p>
+            <form onSubmit={handlePasswordSubmit}>
+              <input
+                type="password"
+                className={`password-input ${passwordError ? 'error' : ''}`}
+                placeholder="Пароль"
+                value={passwordInput}
+                onChange={(e) => {
+                  setPasswordInput(e.target.value)
+                  setPasswordError(false)
+                }}
+                autoFocus
+              />
+              {passwordError && (
+                <p className="password-error-text">Неверный пароль</p>
+              )}
+              <button type="submit" className="password-submit-btn">
+                Открыть
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
