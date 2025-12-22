@@ -2365,7 +2365,7 @@ P.S.
 Но от тебя это не зависит, а ты хочешь контроля ситуации.
 `
 
-export const letterTextFi = `
+export const letterTextByMyself = `
 Я понял что перестал бояться.
 
 Мне стало проще влиться в новый коллектив, общаться с незнакомцами.
@@ -2756,6 +2756,14 @@ export const letters = [
     title: 'Микс',
     text: letterTextMixCup,
     date: '21.12',
+    tag: '',
+    inProgress: false
+  },
+  {
+    id: 43,
+    title: 'By myself',
+    text: letterTextByMyself,
+    date: '22.12',
     tag: '',
     inProgress: false
   }
