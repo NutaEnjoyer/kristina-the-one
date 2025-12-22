@@ -2898,6 +2898,6 @@ export const letters = [
     date: '22.12',
     tag: '',
     password: '1!1!',
-    passwordHint: 'Пароль от твоего компа'
+    passwordHint: 'Пароль от компа Кристины'
   }
 ]
