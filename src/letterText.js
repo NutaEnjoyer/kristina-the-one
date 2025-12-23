@@ -3036,5 +3036,13 @@ export const letters = [
     date: '23.12',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 47,
+    title: 'Free write 2',
+    text: letterTextTimeIsMoney,
+    date: '23.12',
+    tag: '',
+    inProgress: false
   }
 ]
