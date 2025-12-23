@@ -2704,6 +2704,9 @@ export const letterTextUnfairAdvantage = `
 И чем раньше ты это понимаешь, тем меньше времени тратишь впустую.
 `
 
+export const letterTextDemo = ``
+
+
 // Список всех писем с названиями
 export const letters = [
   {
@@ -3106,5 +3109,13 @@ export const letters = [
     date: '23.12',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 50,
+    title: 'Без названия',
+    text: '',
+    date: '23.12',
+    tag: '',
+    inProgress: true
   }
 ]
