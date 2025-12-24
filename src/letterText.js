@@ -3304,5 +3304,13 @@ export const letters = [
     date: '24.12',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 53,
+    title: 'Без названия',
+    text: '',
+    date: '24.12',
+    tag: '',
+    inProgress: true
   }
 ]
