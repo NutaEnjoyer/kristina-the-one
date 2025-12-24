@@ -3404,6 +3404,6 @@ export const letters = [
     text: letterTextFinal,
     date: '24.12',
     tag: '',
-    inProgress: true
+    inProgress: false
   }
 ]
