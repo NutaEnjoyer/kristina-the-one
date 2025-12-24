@@ -3307,7 +3307,7 @@ export const letters = [
   },
   {
     id: 53,
-    title: 'Другая сторона',
+    title: 'Артефакты',
     text: '{"ok": false, "error": "Доступ ограничен!"}',
     date: '24.12',
     tag: '',
