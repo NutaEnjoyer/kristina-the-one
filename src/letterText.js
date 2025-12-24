@@ -3307,6 +3307,15 @@ export const letters = [
   },
   {
     id: 53,
+    title: 'Другая сторона',
+    text: 'Доступ ограничен!',
+    date: '24.12',
+    tag: '',
+    password: 'securityonlymax',
+    passwordHint: 'Как от архива'
+  },
+  {
+    id: 54,
     title: 'Без названия',
     text: '',
     date: '24.12',
