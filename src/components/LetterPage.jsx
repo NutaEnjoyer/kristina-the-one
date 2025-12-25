@@ -22,15 +22,34 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
   const [passwordInput, setPasswordInput] = useState('')
   const [passwordError, setPasswordError] = useState(false)
 
+  // Функция для сортировки писем (закрепленные всегда сверху)
+  const sortLetters = (lettersArray) => {
+    return [...lettersArray].sort((a, b) => {
+      // Закрепленные письма всегда сверху
+      if (a.pinned && !b.pinned) return -1
+      if (!a.pinned && b.pinned) return 1
+      // Для остальных сохраняем текущий порядок
+      return 0
+    })
+  }
+
   // Загрузка писем из локального файла (пока без API)
   useEffect(() => {
-    setLetters(fallbackLetters)
+    setLetters(sortLetters(fallbackLetters))
     setLoading(false)
   }, [])
 
   // Функция переворота списка
   const toggleReverse = () => {
-    setLetters([...letters].reverse())
+    // Разделяем закрепленные и обычные письма
+    const pinnedLetters = letters.filter(l => l.pinned)
+    const regularLetters = letters.filter(l => !l.pinned)
+
+    // Переворачиваем только обычные письма
+    const reversedRegular = [...regularLetters].reverse()
+
+    // Закрепленные всегда остаются сверху
+    setLetters([...pinnedLetters, ...reversedRegular])
     setReversed(!reversed)
 
     // Логируем переключение сортировки
@@ -236,12 +255,13 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
             {letters.map(letter => (
               <button
                 key={letter.id}
-                className="letter-item"
+                className={`letter-item ${letter.pinned ? 'pinned' : ''}`}
                 onClick={() => handleLetterOpen(letter)}
               >
                 <span className="letter-number">{letter.id}</span>
                 <div className="letter-item-content">
                   <span className="letter-item-title">
+                    {letter.pinned && <span className="pin-icon">📌 </span>}
                     {letter.title}
                     {letter.password && (
                       <img
