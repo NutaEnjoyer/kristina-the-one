@@ -2961,6 +2961,14 @@ export const letterTextFinal = `
 Но с тобой было бы лучше.
 `
 
+export const letterTextNotPublished = `
+Я не буду за ней больше бегать. У нее есть 6 дней, что принять решение.
+
+Если нет. Значит она человек который меня не достоин.
+
+Надеюсь найдет себе "идеального".
+`
+
 
 // Список всех писем с названиями
 export const letters = [
@@ -3404,6 +3412,7 @@ export const letters = [
     text: letterTextFinal,
     date: '24.12',
     tag: '',
-    inProgress: false
+    inProgress: false,
+    pinned: true
   }
 ]
