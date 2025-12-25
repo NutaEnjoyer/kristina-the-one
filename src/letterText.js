@@ -3069,6 +3069,38 @@ export const letterTextFreeWrite3 = `
 А резолюции в духе "с понедельника новая жизнь" мне не близки.
 `
 
+export const letterTextFreeWrite3dot2 = `
+8. Что всем так надо расспечатать.
+
+Сегодня ходил печатать документы. Очереди нереальные. Сначала зашел в фотослоника, там как в кб эта маленькая комнатка забита.
+
+Потом пошел в другой фотосалон, просидел в очереди минут 15. Все что то печатали.
+
+9. Как новый год встретишь так и проведешь. 
+
+Не сами нули, а эти выходные. 
+
+Я считаю, что с тобой их проведут только реально близкие люди.
+
+И с ними этот год и нужно проводить.
+`
+
+export const  letterTextJustKissMeWeCanTalkLatter = `
+Я устал один анализировать. 
+
+Разбираться в догадках неэффективно.
+
+Just Kiss Me Now, We Can Talk Later.
+
+Да, именно так.
+
+Мне не нужен от тебя ответ. Мне не нужен разговор. Не сейчас.
+
+Просто дай знать как угодно. 
+
+А поговорим позже, когда будем готовы.
+`
+
 // Список всех писем с названиями
 export const letters = [
   {
@@ -3511,8 +3543,7 @@ export const letters = [
     text: letterTextFinal,
     date: '24.12',
     tag: '',
-    inProgress: false,
-    pinned: true
+    inProgress: false
   },
   {
     id: 55,
@@ -3521,5 +3552,14 @@ export const letters = [
     date: '25.12',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 56,
+    title: 'Kiss Me Now We Can Talk Later',
+    text: letterTextJustKissMeWeCanTalkLatter,
+    date: '25.12',
+    tag: '',
+    inProgress: false,
+    pinned: true
   }
 ]
