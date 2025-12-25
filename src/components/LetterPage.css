@@ -219,24 +219,24 @@
 
 /* Закрепленная запись */
 .letter-item.pinned {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 235, 170, 0.15));
-  border: 3px solid rgba(255, 193, 7, 0.6);
-  box-shadow: 0 12px 40px rgba(255, 193, 7, 0.35);
+  background: linear-gradient(135deg, rgba(110, 181, 255, 0.2), rgba(184, 212, 241, 0.25));
+  border: 3px solid rgba(74, 144, 226, 0.7);
+  box-shadow: 0 12px 40px rgba(74, 144, 226, 0.4);
   position: relative;
   animation: pinGlow 3s ease-in-out infinite;
 }
 
 .letter-item.pinned:hover {
-  border-color: rgba(255, 193, 7, 0.8);
-  box-shadow: 0 16px 50px rgba(255, 193, 7, 0.45);
+  border-color: rgba(74, 144, 226, 0.9);
+  box-shadow: 0 16px 50px rgba(74, 144, 226, 0.5);
 }
 
 @keyframes pinGlow {
   0%, 100% {
-    box-shadow: 0 12px 40px rgba(255, 193, 7, 0.35);
+    box-shadow: 0 12px 40px rgba(74, 144, 226, 0.4);
   }
   50% {
-    box-shadow: 0 12px 40px rgba(255, 193, 7, 0.5);
+    box-shadow: 0 12px 40px rgba(74, 144, 226, 0.55);
   }
 }
 
@@ -245,7 +245,7 @@
   height: 18px;
   margin-right: 8px;
   flex-shrink: 0;
-  filter: brightness(0) saturate(100%) invert(60%) sepia(85%) saturate(1500%) hue-rotate(25deg) brightness(100%) contrast(95%);
+  filter: brightness(0) saturate(100%) invert(50%) sepia(75%) saturate(1500%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
 
 /* Кнопка выбора цветов */
