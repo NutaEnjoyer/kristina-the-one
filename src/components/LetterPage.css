@@ -241,8 +241,11 @@
 }
 
 .pin-icon {
-  font-size: 1.1rem;
-  filter: grayscale(0);
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(60%) sepia(85%) saturate(1500%) hue-rotate(25deg) brightness(100%) contrast(95%);
 }
 
 /* Кнопка выбора цветов */

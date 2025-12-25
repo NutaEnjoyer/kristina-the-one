@@ -261,7 +261,13 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
                 <span className="letter-number">{letter.id}</span>
                 <div className="letter-item-content">
                   <span className="letter-item-title">
-                    {letter.pinned && <span className="pin-icon">📌 </span>}
+                    {letter.pinned && (
+                      <img
+                        src="/icons/pin.svg"
+                        alt="Закреплено"
+                        className="pin-icon"
+                      />
+                    )}
                     {letter.title}
                     {letter.password && (
                       <img
