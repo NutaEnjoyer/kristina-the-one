@@ -3169,11 +3169,11 @@ https://halo-ai.ru/
 
 ---
 
-nginx присылал уведомление о подозрительной активности на этом сайте. Я в моменте подумал о "хорошем". Оказалось обычные парсеры активизировались под конец года, подсобрать архивов. Странно, что он с 10-20 заходов из разных стран запаниковал.
+nginx присылал уведомление о подозрительной активности на этом сайте. Я в моменте подумал о "хорошем". Оказалось обычные парсеры активизировались под конец года, подсобрать архивы. Странно, что он с 10-20 заходов из разных стран запаниковал.
 
 ---
 
-Полазил на солвите. Нашел пару джунов кто себе ищет напарника. 
+Полазил на Солвите. Нашел пару джунов кто себе ищет напарника. 
 
 Может я педагог? 
 
@@ -3211,7 +3211,7 @@ Il est temps de passer à écrire des notes en français
 
 Ok, let's write one article in English. 
 
-Helping others became my best productivity hack. When I try to explain information to a jinuor about anything, my brain generates another, more simple examples, rules and analogies from real life.
+Helping others became my best productivity hack. When I try to explain information to a junior about anything, my brain generates another, more simple examples, rules and analogies from real life.
 
 It helps me too. When I learn something new, and have no one to talk to about it. I speak with myself. Imagine that I am a kid or man who doesn't know about it, and try to explain. I generate more and more stupid but important questions and answer them for myself.
 
@@ -3219,9 +3219,9 @@ Explaining to someone else is the best practice to learn.
 
 --- 
 
-По поводу языков. Английский у меня B1-B2. Но это чтение, слушание, письмо. Но не говорения. 
+По поводу языков. Английский у меня B1-B2. Но это чтение, слушание, письмо. Но не говорение. 
 
-У меня плохой акцент. Так же и с французский будет. Хотя буквы р в французском проще поставить. Но все же.
+У меня плохой акцент. Так же и с французским будет. Хотя буквы р в французском проще поставить. Но все же.
 
 Просто нет практики. У меня разговоры на английском в жизни были только в кс и пару раз на улице я объяснял как до вокзала добраться.
 
@@ -3241,7 +3241,15 @@ Explaining to someone else is the best practice to learn.
 
 --- 
 
+На НГ поеду к родителям. Полгода не был. Плюс Семен со своими хочет встретить вместе с нами. Будет нас много. 
 
+Главное не запускать фейерверк с рук как в прошлый раз)
+
+--- 
+
+Главная фраза за сегодня. 
+
+Это не репетиция.
 `
 
 // Список всех писем с названиями
@@ -3715,8 +3723,8 @@ export const letters = [
   },
   {
     id: 58,
-    title: 'Без названия',
-    text: "",
+    title: '26.12',
+    text: letterTextFree,
     date: '26.12',
     tag: '',
     inProgress: true
