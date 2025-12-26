@@ -3727,7 +3727,7 @@ export const letters = [
     text: letterTextFree,
     date: '26.12',
     tag: '',
-    inProgress: true
+    inProgress: false
   },
 
 ]
