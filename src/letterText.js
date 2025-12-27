@@ -3330,8 +3330,6 @@ export const letterTextQWERTYuio = `
 Неприятно? Да.
 
 Нужно? Абсолютно.
-
-Повторю? Без сомнений.
 `
 
 export const letterTextNeVyshloIPohuy = `
@@ -4012,7 +4010,7 @@ export const letters = [
   },
   {
     id: 62,
-    title: 'Без названия',
+    title: 'Ne Polychilos',
     text: '',
     date: '27.12',
     tag: '',
