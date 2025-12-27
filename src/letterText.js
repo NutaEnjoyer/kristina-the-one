@@ -3326,10 +3326,6 @@ export const letterTextSkyka = `
 
 export const letterTextQWERTYuio = `
 Вот это я шумиху поднял)
-
-Неприятно? Да.
-
-Нужно? Абсолютно.
 `
 
 export const letterTextNeVyshloIPohuy = `
