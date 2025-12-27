@@ -3867,7 +3867,7 @@ export const letters = [
   },
   {
     id: 61,
-    title: 'Ne Vyshlo I Pohuy',
+    title: 'Без названия',
     text: '',
     date: '27.12',
     tag: '',
