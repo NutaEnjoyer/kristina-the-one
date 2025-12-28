@@ -4237,7 +4237,7 @@ export const letters = [
     date: '25.12',
     tag: '',
     inProgress: false,
-    pinned: true
+    pinned: false
   },
   {
     id: 57,
