@@ -4200,7 +4200,7 @@ export const letters = [
   },
   {
     id: 65,
-    title: 'Женская психология',
+    title: 'Женская психика',
     text: '',
     date: '28.12',
     tag: '',
