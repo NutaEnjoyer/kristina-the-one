@@ -3680,7 +3680,7 @@ export const examples = `
 `
 
 export const letterTextBlyad = `
-Блядь.
+Блять.
 
 Это все меняет.
 
@@ -4215,7 +4215,7 @@ export const letters = [
   },
   {
     id: 65,
-    title: 'Блядь',
+    title: 'Блять',
     text: letterTextBlyad,
     date: '28.12',
     tag: '',
