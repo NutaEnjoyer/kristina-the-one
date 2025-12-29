@@ -192,6 +192,114 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
     }
   }, [selectedLetter])
 
+  // Кастомный видео плеер
+  const CustomVideoPlayer = ({ mediaItem }) => {
+    const videoRef = useRef(null)
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [showControls, setShowControls] = useState(true)
+
+    const togglePlay = () => {
+      if (videoRef.current) {
+        if (isPlaying) {
+          videoRef.current.pause()
+        } else {
+          videoRef.current.play()
+        }
+        setIsPlaying(!isPlaying)
+      }
+    }
+
+    const handleVideoClick = () => {
+      togglePlay()
+    }
+
+    return (
+      <div
+        className="custom-video-container"
+        onMouseEnter={() => setShowControls(true)}
+        onMouseLeave={() => setShowControls(true)}
+      >
+        <video
+          ref={videoRef}
+          className="letter-media-video"
+          preload="metadata"
+          onClick={handleVideoClick}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          poster={mediaItem.thumbnail}
+          loop
+        >
+          <source src={mediaItem.url} type="video/mp4" />
+        </video>
+
+        {/* Кастомная кнопка play */}
+        {!isPlaying && showControls && (
+          <div className="video-play-overlay" onClick={togglePlay}>
+            <div className="video-play-button">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="38" stroke="white" strokeWidth="3" fill="rgba(0,0,0,0.6)"/>
+                <path d="M32 25 L32 55 L55 40 Z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+        )}
+
+        {/* Индикатор паузы */}
+        {isPlaying && showControls && (
+          <div className="video-pause-indicator">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <rect x="18" y="15" width="8" height="30" fill="white" rx="2"/>
+              <rect x="34" y="15" width="8" height="30" fill="white" rx="2"/>
+            </svg>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // Функции для рендеринга медиа
+  const renderMediaItem = (mediaItem) => {
+    if (mediaItem.type === 'image') {
+      return (
+        <div key={mediaItem.id} className="media-item media-image">
+          <img
+            src={mediaItem.url}
+            alt={mediaItem.alt || mediaItem.caption || 'Image'}
+            className="letter-media-img"
+            loading="lazy"
+          />
+          {mediaItem.caption && <p className="media-caption">{mediaItem.caption}</p>}
+        </div>
+      )
+    } else if (mediaItem.type === 'video') {
+      return (
+        <div key={mediaItem.id} className="media-item media-video">
+          <CustomVideoPlayer mediaItem={mediaItem} />
+          {mediaItem.caption && <p className="media-caption">{mediaItem.caption}</p>}
+        </div>
+      )
+    }
+    return null
+  }
+
+  const renderMediaSection = (mediaItems) => {
+    if (!mediaItems || mediaItems.length === 0) return null
+    return (
+      <div className="letter-media-section">
+        {mediaItems.map(mediaItem => renderMediaItem(mediaItem))}
+      </div>
+    )
+  }
+
+  const renderMediaGallery = (mediaItems) => {
+    if (!mediaItems || mediaItems.length === 0) return null
+    return (
+      <div className="letter-media-gallery">
+        {mediaItems.map(mediaItem => renderMediaItem(mediaItem))}
+      </div>
+    )
+  }
+
   // Если письмо выбрано, показываем его
   if (selectedLetter) {
     // Находим индекс текущего письма
@@ -209,13 +317,23 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
             <h1 className="letter-title">{selectedLetter.title}</h1>
             {selectedLetter.tag && <span className="letter-tag">{selectedLetter.tag}</span>}
           </div>
+
           {selectedLetter.date && <p className="letter-full-date">{selectedLetter.date}</p>}
+
+          {/* Медиа сверху */}
+          {selectedLetter.media && renderMediaSection(selectedLetter.media.filter(m => m.position === 'top'))}
 
           <div className="letter-full-text">
             {selectedLetter.text.split('\n').map((paragraph, index) => (
               paragraph.trim() ? <p key={index}>{paragraph}</p> : <br key={index} />
             ))}
           </div>
+
+          {/* Медиа снизу */}
+          {selectedLetter.media && renderMediaSection(selectedLetter.media.filter(m => m.position === 'bottom'))}
+
+          {/* Галерея медиа */}
+          {selectedLetter.media && renderMediaGallery(selectedLetter.media.filter(m => m.position === 'gallery'))}
 
           {/* Кнопка перехода к следующему письму */}
           {nextLetter && (

@@ -11,7 +11,10 @@
       "Bash(docker-compose logs:*)",
       "Bash(docker-compose up:*)",
       "Bash(docker-compose down:*)",
-      "Bash(docker-compose ps:*)"
+      "Bash(docker-compose ps:*)",
+      "Bash(dir /s /b *.jpg *.jpeg *.png *.gif *.mp4 *.webm)",
+      "Bash(mkdir:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []
