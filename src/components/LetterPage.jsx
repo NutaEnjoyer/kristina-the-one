@@ -228,6 +228,8 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
           onPause={() => setIsPlaying(false)}
           poster={mediaItem.thumbnail}
           loop
+          playsInline
+          webkit-playsinline="true"
         >
           <source src={mediaItem.url} type="video/mp4" />
         </video>
