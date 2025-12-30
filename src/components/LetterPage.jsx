@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import './LetterPage.css'
-import { letters as fallbackLetters } from '../letterText'
+import { letters as fallbackLetters, availableTags, tagMapping } from '../letterText'
 import { logLetterOpen, logButtonClick } from '../utils/logger'
 // import { lettersApi } from '../api/lettersApi' // Для будущего использования с API
 // import { LetterForm } from './LetterForm' // Для будущего использования с API
@@ -11,6 +11,7 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
   const [letters, setLetters] = useState([])
   const [loading, setLoading] = useState(true)
   const [reversed, setReversed] = useState(false) // Флаг реверса
+  const [selectedTag, setSelectedTag] = useState('all') // Выбранный тег для фильтрации
   // const [error, setError] = useState(null) // Не используется при локальной загрузке
   // const [showForm, setShowForm] = useState(false) // Для будущего CRUD
   // const [editingLetter, setEditingLetter] = useState(null) // Для будущего CRUD
@@ -351,6 +352,13 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
     )
   }
 
+  // Фильтрация писем по тегу
+  const filteredLetters = letters.filter(letter => {
+    if (selectedTag === 'all') return true
+    const letterTagId = tagMapping[letter.tag] || 'other'
+    return letterTagId === selectedTag
+  })
+
   // Иначе показываем список писем
   return (
     <div className="letter-page-full">
@@ -371,8 +379,34 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
           </button>
         </div>
 
+        {/* Фильтр по тегам */}
+        <div className="tag-filter-dropdown">
+          <label htmlFor="tag-select" className="tag-filter-label">Фильтр:</label>
+          <select
+            id="tag-select"
+            className="tag-select"
+            value={selectedTag}
+            onChange={(e) => {
+              const newTag = e.target.value
+              setSelectedTag(newTag)
+              const tagName = availableTags.find(t => t.id === newTag)?.name || 'Все'
+              logButtonClick(`Фильтр по тегу: ${tagName}`, {
+                source: 'diary-tag-filter',
+                tagId: newTag,
+                tagName: tagName
+              })
+            }}
+          >
+            {availableTags.map(tag => (
+              <option key={tag.id} value={tag.id}>
+                {tag.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
           <div className="letters-list">
-            {letters.map(letter => (
+            {filteredLetters.map(letter => (
               <button
                 key={letter.id}
                 className={`letter-item ${letter.pinned ? 'pinned' : ''}`}
