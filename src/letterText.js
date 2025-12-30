@@ -3829,7 +3829,9 @@ export const letterTextFreeWrite3012 = `
 
 Не трать себя.
 
---- 
+---
+Еще опаснее фантазировать о мести.
+
 Самая опасная зависимость это зависимость от собственных фантазий.
 
 В психологие есть такое понятие.
@@ -4422,10 +4424,10 @@ export const letters = [
   },
   {
     id: 69,
-    title: 'Free write',
-    text: '',
+    title: 'Фантазия',
+    text: letterTextFreeWrite3012,
     date: '30.12',
     tag: '',
-    inProgress: true
+    inProgress: false
   }
 ]
