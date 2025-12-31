@@ -5011,7 +5011,7 @@ export const letters = [
   },
   {
     id: 71,
-    title: 'Python TeamLead: Старт',
+    title: 'TeamLead',
     text: letterTextPythonTeamLeadStart,
     date: '31.12',
     tag: 'TeamLead',
@@ -5019,7 +5019,7 @@ export const letters = [
   },
   {
     id: 72,
-    title: 'Python TeamLead: Оценка от Claude',
+    title: 'Оценка от Claude',
     text: letterTextPythonTeamLeadClaudeRate,
     date: '31.12',
     tag: 'TeamLead',
