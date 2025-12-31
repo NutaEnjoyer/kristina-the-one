@@ -7,6 +7,7 @@ import FinalScene from './components/FinalScene'
 import { LetterPageFull } from './components/LetterPage'
 import { HomePage } from './components/HomePage'
 import { SchedulePage } from './components/SchedulePage'
+import { DictionaryPage } from './components/DictionaryPage'
 import { UNIPage } from './components/UNIPage'
 import { MusicPage } from './components/MusicPage'
 import {
@@ -196,6 +197,9 @@ function App() {
       break
     case 'schedule':
       pageContent = <SchedulePage onBack={handleBackToHome} />
+      break
+    case 'dictionary':
+      pageContent = <DictionaryPage onBack={handleBackToHome}/>
       break
     case 'music':
       pageContent = <MusicPage onBack={handleBackToHome} />
