@@ -33,6 +33,12 @@ export function HomePage({ onNavigate }) {
       description: 'Структура дня'
     },
     {
+      id: 'dictionary',
+      title: 'Словарь',
+      icon: '/icons/naver-dictionary-svgrepo-com.svg',
+      description: 'Словарь слов'
+    },
+    {
       id: 'music',
       title: 'Музыка',
       icon: '/icons/music-svgrepo-com.svg',
