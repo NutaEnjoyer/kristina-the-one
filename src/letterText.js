@@ -5115,7 +5115,7 @@ export const letters = [
     media: [
       {
         id: 1,
-        type: 'photo',
+        type: 'image',
         url: '/media/notes/me.jpg',
         caption: 'Cameraman',
         position: 'bottom',
