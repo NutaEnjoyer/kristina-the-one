@@ -260,6 +260,121 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
     )
   }
 
+  // Кастомный аудио плеер
+  const CustomAudioPlayer = ({ mediaItem }) => {
+    const audioRef = useRef(null)
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [currentTime, setCurrentTime] = useState(0)
+    const [duration, setDuration] = useState(0)
+    const [volume, setVolume] = useState(1)
+
+    const togglePlay = () => {
+      if (audioRef.current) {
+        if (isPlaying) {
+          audioRef.current.pause()
+        } else {
+          audioRef.current.play()
+        }
+        setIsPlaying(!isPlaying)
+      }
+    }
+
+    const handleTimeUpdate = () => {
+      if (audioRef.current) {
+        setCurrentTime(audioRef.current.currentTime)
+      }
+    }
+
+    const handleLoadedMetadata = () => {
+      if (audioRef.current) {
+        setDuration(audioRef.current.duration)
+      }
+    }
+
+    const handleProgressClick = (e) => {
+      if (audioRef.current) {
+        const bounds = e.currentTarget.getBoundingClientRect()
+        const x = e.clientX - bounds.left
+        const percentage = x / bounds.width
+        audioRef.current.currentTime = percentage * duration
+      }
+    }
+
+    const handleVolumeChange = (e) => {
+      const newVolume = parseFloat(e.target.value)
+      setVolume(newVolume)
+      if (audioRef.current) {
+        audioRef.current.volume = newVolume
+      }
+    }
+
+    const formatTime = (seconds) => {
+      if (isNaN(seconds)) return '0:00'
+      const mins = Math.floor(seconds / 60)
+      const secs = Math.floor(seconds % 60)
+      return `${mins}:${secs.toString().padStart(2, '0')}`
+    }
+
+    return (
+      <div className="custom-audio-container">
+        <audio
+          ref={audioRef}
+          src={mediaItem.url}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onEnded={() => setIsPlaying(false)}
+        />
+
+        <div className="audio-controls">
+          {/* Кнопка Play/Pause */}
+          <button className="audio-play-btn" onClick={togglePlay}>
+            {isPlaying ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="6" y="5" width="4" height="14" fill="currentColor" rx="1"/>
+                <rect x="14" y="5" width="4" height="14" fill="currentColor" rx="1"/>
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M8 5 L8 19 L19 12 Z" fill="currentColor"/>
+              </svg>
+            )}
+          </button>
+
+          {/* Прогресс бар */}
+          <div className="audio-progress-section">
+            <span className="audio-time">{formatTime(currentTime)}</span>
+            <div className="audio-progress-bar" onClick={handleProgressClick}>
+              <div
+                className="audio-progress-fill"
+                style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
+              />
+            </div>
+            <span className="audio-time">{formatTime(duration)}</span>
+          </div>
+
+          {/* Громкость */}
+          <div className="audio-volume-section">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/>
+              <path d="M15.54 8.46a5 5 0 010 7.07" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+              className="audio-volume-slider"
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   // Функции для рендеринга медиа
   const renderMediaItem = (mediaItem) => {
     if (mediaItem.type === 'image') {
@@ -278,6 +393,13 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
       return (
         <div key={mediaItem.id} className="media-item media-video">
           <CustomVideoPlayer mediaItem={mediaItem} />
+          {mediaItem.caption && <p className="media-caption">{mediaItem.caption}</p>}
+        </div>
+      )
+    } else if (mediaItem.type === 'audio') {
+      return (
+        <div key={mediaItem.id} className="media-item media-audio">
+          <CustomAudioPlayer mediaItem={mediaItem} />
           {mediaItem.caption && <p className="media-caption">{mediaItem.caption}</p>}
         </div>
       )
