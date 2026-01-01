@@ -5112,6 +5112,16 @@ export const letters = [
     title: '31.12',
     text: letterText31,
     date: '31.12',
+    media: [
+      {
+        id: 1,
+        type: 'photo',
+        url: '/media/notes/me.jpg',
+        caption: 'Cameraman',
+        position: 'bottom',
+        alt: ''
+      }
+    ],
     tag: '',
     inProgress: false
   },
