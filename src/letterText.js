@@ -5190,6 +5190,6 @@ export const letters = [
     text: letterTextFreeWrite0101,
     date: '01.01',
     tag: '',
-    inProgress: true
+    inProgress: false
   }
 ]
