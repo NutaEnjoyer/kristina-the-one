@@ -5132,5 +5132,13 @@ export const letters = [
     date: '01.01',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 76,
+    title: 'Free write',
+    text: '',
+    date: '01.01',
+    tag: '',
+    inProgress: true
   }
 ]
