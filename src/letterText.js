@@ -5248,7 +5248,7 @@ export const letters = [
       {
         id: 1,
         type: 'image',
-        url: '/media/notes/mea.jpg',
+        url: '/media/notes/mea.JPG',
         caption: '',
         position: 'bottom',
         alt: ''
