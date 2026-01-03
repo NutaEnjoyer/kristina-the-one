@@ -30,7 +30,7 @@ export function MusicPage({ onBack }) {
     },
     {
       id: 4,
-      artist: 'NLE CHOPPA',
+      artist: 'NLE Choppa',
       track: 'KO',
       file: '/music/KO.mp3'
     },
