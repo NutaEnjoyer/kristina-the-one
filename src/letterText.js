@@ -5608,6 +5608,6 @@ export const letters = [
     text: letterTextFreeWrite0301,
     date: '03.01',
     tag: '',
-    inProgress: true
+    inProgress: false
   }
 ]
