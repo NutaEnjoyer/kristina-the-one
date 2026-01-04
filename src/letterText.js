@@ -4933,6 +4933,16 @@ export const letterTextDoc = `
 Voximplant - контора п*дарасов 😜
 `
 
+export const letterTextOliver = `
+Самый трогательный момент в гонках, который я наблюдал.
+
+Оливер Роуланд стал чемпионом мира досрочно.
+
+"Oliver, we have a special message for you". 
+
+А дальше голос его дочери и мурашки по коже.
+`
+
 // Строгий список доступных тегов
 export const availableTags = [
   { id: 'all', name: 'Все', color: '#8B7AA8' },
@@ -5669,5 +5679,21 @@ export const letters = [
     date: '04.01',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 85,
+    title: 'Оливер Роуланд',
+    text: letterTextOliver,
+    date: '04.01',
+    media: [
+      {
+        id: 1,
+        type: 'video',
+        url: '/media/notes/oliver.mp4',
+        caption: '',
+        position: 'bottom',
+        alt: 'Alternative text'
+      }
+    ]
   }
 ]
