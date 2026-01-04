@@ -4941,6 +4941,8 @@ export const letterTextOliver = `
 "Oliver, we have a special message for you". 
 
 А дальше голос его дочери и мурашки по коже.
+
+Как же это мило.
 `
 
 // Строгий список доступных тегов
