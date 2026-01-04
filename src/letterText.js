@@ -5613,13 +5613,13 @@ export const letters = [
     date: '03.01',
     tag: '',
     inProgress: false
-  },
-  {
-    id: 83,
-    title: '',
-    text: letterTextDoc,
-    date: '04.01',
-    tag: '',
-    inProgress: false
   }
+  // {
+  //   id: 83,
+  //   title: '',
+  //   text: letterTextDoc,
+  //   date: '04.01',
+  //   tag: '',
+  //   inProgress: false
+  // }
 ]
