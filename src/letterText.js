@@ -5678,7 +5678,7 @@ export const letters = [
     id: 84,
     title: 'Режим',
     text: letterTextScheduleTroublesImproved,
-    date: '04.01',
+    date: '05.01',
     tag: '',
     inProgress: false
   },
@@ -5686,7 +5686,7 @@ export const letters = [
     id: 85,
     title: 'Оливер Роуланд',
     text: letterTextOliver,
-    date: '04.01',
+    date: '05.01',
     media: [
       {
         id: 1,
