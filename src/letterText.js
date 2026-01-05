@@ -4945,6 +4945,23 @@ export const letterTextOliver = `
 Как же это мило.
 `
 
+export const letterText392 = `
+Проснулся с ощущением контузии.
+
+Не от жара, а от звона в ушах.
+
+Понимаю, все хуево. Очень хуево.
+
+Просто встать почти невозмонжо, голова кружится, перед глазами все плывет. 
+
+На ощупь как то нашел градусник.
+
+39.2.
+
+Пиздец.
+`
+
+
 // Строгий список доступных тегов
 export const availableTags = [
   { id: 'all', name: 'Все', color: '#8B7AA8' },
@@ -5697,5 +5714,13 @@ export const letters = [
         alt: 'Alternative text'
       }
     ]
+  },
+  {
+    id: 86,
+    title: '39.2',
+    text: letterText392,
+    date: '05.01',
+    tag: '',
+    inProgress: false
   }
 ]
