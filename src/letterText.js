@@ -5722,5 +5722,13 @@ export const letters = [
     date: '05.01',
     tag: '',
     inProgress: false
+  },
+  {
+    id: 87,
+    title: 'Без названия',
+    text: '',
+    date: '05.01',
+    tag: '',
+    inProgress: true
   }
 ]
