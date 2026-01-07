@@ -171,7 +171,7 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
         letterId: pendingLetter.id,
         letterTitle: pendingLetter.title,
         status: 'failed',
-        attemptedPassword: passwordInput.replace(/./g, '*') // Маскируем пароль звездочками
+        attemptedPassword: passwordInput // Маскируем пароль звездочками
       })
 
       setPasswordError(true)
