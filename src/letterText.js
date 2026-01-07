@@ -5845,12 +5845,12 @@ export const letters = [
     tag: '',
     inProgress: false,
     password: 'qwerty123'
-  },
-  {
-    id: 90,
-    title: 'Небольшой кусочек',
-    text: letterTextBigFreeWrite,
-    date: '07.01',
-    inProgress: false
   }
+  // {
+  //   id: 90,
+  //   title: 'Небольшой кусочек',
+  //   text: letterTextBigFreeWrite,
+  //   date: '07.01',
+  //   inProgress: false
+  // }
 ]
