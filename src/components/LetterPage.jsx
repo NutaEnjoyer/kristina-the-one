@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react'
 import './LetterPage.css'
 import { letters as fallbackLetters, availableTags, tagMapping } from '../letterText'
 import { logLetterOpen, logButtonClick } from '../utils/logger'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 // import { lettersApi } from '../api/lettersApi' // Для будущего использования с API
 // import { LetterForm } from './LetterForm' // Для будущего использования с API
 
@@ -449,9 +451,9 @@ export function LetterPageFull({ onClose, onShowFlowers, onBack }) {
           {selectedLetter.media && renderMediaSection(selectedLetter.media.filter(m => m.position === 'top'))}
 
           <div className="letter-full-text">
-            {selectedLetter.text.split('\n').map((paragraph, index) => (
-              paragraph.trim() ? <p key={index}>{paragraph}</p> : <br key={index} />
-            ))}
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {selectedLetter.text}
+            </ReactMarkdown>
           </div>
 
           {/* Медиа снизу */}

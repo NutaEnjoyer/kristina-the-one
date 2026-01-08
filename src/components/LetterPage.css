@@ -111,6 +111,257 @@
   margin-bottom: 20px;
 }
 
+/* ===== MARKDOWN STYLES ===== */
+
+/* Заголовки в markdown */
+.letter-full-text h1 {
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #4a90e2;
+  margin: 40px 0 20px 0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(110, 181, 255, 0.3);
+}
+
+.letter-full-text h2 {
+  font-size: 1.9rem;
+  font-weight: 400;
+  color: #4a90e2;
+  margin: 35px 0 18px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(110, 181, 255, 0.2);
+}
+
+.letter-full-text h3 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #5aa3e8;
+  margin: 30px 0 15px 0;
+}
+
+.letter-full-text h4 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #5aa3e8;
+  margin: 25px 0 12px 0;
+}
+
+.letter-full-text h5,
+.letter-full-text h6 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #6eb5ff;
+  margin: 20px 0 10px 0;
+}
+
+/* Списки */
+.letter-full-text ul,
+.letter-full-text ol {
+  margin: 20px 0;
+  padding-left: 35px;
+}
+
+.letter-full-text ul li,
+.letter-full-text ol li {
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
+
+.letter-full-text ul li::marker {
+  color: #4a90e2;
+}
+
+.letter-full-text ol li::marker {
+  color: #4a90e2;
+  font-weight: 500;
+}
+
+/* Вложенные списки */
+.letter-full-text ul ul,
+.letter-full-text ol ol,
+.letter-full-text ul ol,
+.letter-full-text ol ul {
+  margin: 10px 0;
+}
+
+/* Блоки кода */
+.letter-full-text code {
+  background: rgba(110, 181, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #4a90e2;
+  border: 1px solid rgba(110, 181, 255, 0.2);
+}
+
+.letter-full-text pre {
+  background: rgba(110, 181, 255, 0.08);
+  border: 1px solid rgba(110, 181, 255, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 25px 0;
+  overflow-x: auto;
+  box-shadow: 0 4px 15px rgba(110, 181, 255, 0.1);
+}
+
+.letter-full-text pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  color: #333;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+/* Цитаты */
+.letter-full-text blockquote {
+  margin: 25px 0;
+  padding: 20px 25px;
+  border-left: 4px solid #4a90e2;
+  background: rgba(184, 212, 241, 0.15);
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: #555;
+}
+
+.letter-full-text blockquote p {
+  margin-bottom: 10px;
+}
+
+.letter-full-text blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Горизонтальная линия */
+.letter-full-text hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(110, 181, 255, 0.4),
+    transparent
+  );
+  margin: 40px 0;
+}
+
+/* Ссылки */
+.letter-full-text a {
+  color: #4a90e2;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(110, 181, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.letter-full-text a:hover {
+  color: #6eb5ff;
+  border-bottom-color: #6eb5ff;
+}
+
+/* Жирный и курсив */
+.letter-full-text strong {
+  font-weight: 500;
+  color: #4a90e2;
+}
+
+.letter-full-text em {
+  font-style: italic;
+  color: #5aa3e8;
+}
+
+/* Таблицы (GitHub Flavored Markdown) */
+.letter-full-text table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(110, 181, 255, 0.1);
+}
+
+.letter-full-text table thead {
+  background: rgba(110, 181, 255, 0.15);
+}
+
+.letter-full-text table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 500;
+  color: #4a90e2;
+  border-bottom: 2px solid rgba(110, 181, 255, 0.3);
+}
+
+.letter-full-text table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(110, 181, 255, 0.1);
+}
+
+.letter-full-text table tr:last-child td {
+  border-bottom: none;
+}
+
+.letter-full-text table tr:hover {
+  background: rgba(110, 181, 255, 0.05);
+}
+
+/* Зачеркнутый текст (GFM) */
+.letter-full-text del {
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* Чекбоксы (GFM Task Lists) */
+.letter-full-text input[type="checkbox"] {
+  margin-right: 8px;
+  cursor: pointer;
+  accent-color: #4a90e2;
+}
+
+/* Мобильная адаптация для markdown */
+@media (max-width: 768px) {
+  .letter-full-text h1 {
+    font-size: 1.8rem;
+    margin: 30px 0 15px 0;
+  }
+
+  .letter-full-text h2 {
+    font-size: 1.5rem;
+    margin: 25px 0 12px 0;
+  }
+
+  .letter-full-text h3 {
+    font-size: 1.3rem;
+    margin: 20px 0 10px 0;
+  }
+
+  .letter-full-text ul,
+  .letter-full-text ol {
+    padding-left: 25px;
+  }
+
+  .letter-full-text pre {
+    padding: 15px;
+    margin: 20px 0;
+    font-size: 0.85em;
+  }
+
+  .letter-full-text blockquote {
+    padding: 15px 20px;
+    margin: 20px 0;
+  }
+
+  .letter-full-text table {
+    font-size: 0.9rem;
+  }
+
+  .letter-full-text table th,
+  .letter-full-text table td {
+    padding: 10px;
+  }
+}
+
 .next-letter-btn {
   display: block;
   margin: 40px auto 0;
