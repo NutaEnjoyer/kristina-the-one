@@ -6493,5 +6493,12 @@ export const letters = [
     text: letterTextFreeWrite1001,
     date: '10.01',
     inProgress: false
+  },
+  {
+    id: 92,
+    title: 'Без названия',
+    text: '',
+    date: '10.01',
+    inProgress: true
   }
 ]
