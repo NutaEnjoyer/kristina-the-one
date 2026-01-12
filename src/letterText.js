@@ -7133,7 +7133,7 @@ export const letters = [
     id: 93,
     title: 'OSINT',
     text: letterTextOSINT,
-    date: '12.01',
+    date: '13.01',
     inProgress: false
   },
   {
