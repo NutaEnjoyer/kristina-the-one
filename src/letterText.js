@@ -7140,7 +7140,7 @@ export const letters = [
     id: 94,
     title: 'Казуальный секс',
     text: '',
-    date: '12.01',
+    date: '13.01',
     inProgress: true
   }
 ]
