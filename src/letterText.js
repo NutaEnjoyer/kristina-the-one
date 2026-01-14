@@ -7185,5 +7185,12 @@ export const letters = [
     text: letterTextCasualSex,
     date: '14.01',
     inProgress: false
+  },
+  {
+    id: 96,
+    title: 'Free write',
+    text: '',
+    date: '14.01',
+    inProgress: true
   }
 ]
